@@ -8,6 +8,7 @@ public class ErpProjectApplication {
 
 	public static void main(String[] args) {
 		SpringApplication.run(ErpProjectApplication.class, args);
+		String test = "test";
 	}
 
 }
