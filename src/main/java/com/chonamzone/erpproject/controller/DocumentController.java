@@ -11,4 +11,15 @@ public class DocumentController {
 	public String documentcontroller() {
 		return"document";
 	}
+	
+	@GetMapping("/document/vacation")
+	public String documentvacationcontroller() {
+		return"documentvacation";
+	}
+	
+	@GetMapping("/document/travel")
+	public String documenttravelcontroller() {
+		return"documenttravel";
+	}
+
 }
