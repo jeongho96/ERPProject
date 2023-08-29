@@ -1,0 +1,7 @@
+/**
+ * 
+ */
+
+function printDocument() {
+  window.print();
+}

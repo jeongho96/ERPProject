@@ -1,0 +1,125 @@
+  #header {
+    /* 기안서 작성 */
+	
+	position: absolute;
+	width: 117px;
+	height: 22px;
+	left: 366px;
+	top: 179px;
+	
+	font-family: 'Fascinate';
+	font-style: normal;
+	font-weight: 900;
+	font-size: 20px;
+	line-height: 27px;
+	
+	color: #4F7578;
+
+
+  }
+  
+  .table-container {
+    /* Rectangle 38 */
+	
+	position: absolute;
+	width: 1033px;
+	height: 457px;
+	left: 366px;
+	top: 256px;
+	
+	background: #DCDED4;
+
+  }
+  
+
+  td {
+	  margin-top: 10px;
+  }
+  
+  .order-number {
+  	position: absolute;
+    width: 700px;
+   	height: 21px;
+    left: 140px;
+    top: 50px;
+    display: flex;
+    font-family: 'Fascinate';
+    font-style: normal;
+    font-weight: 900;
+    font-size: 20px;
+    line-height: 27px;
+    color: #4F7578;
+    flex-wrap: nowrap;
+    flex-direction: row;
+    align-content: center;
+    justify-content: space-between;
+}
+  
+  .order-number-one {
+    position: absolute;
+    width: 880px;
+    height: 43px;
+    left: 70px;
+    top: 130px;
+    background: #FFFFFF;
+    display: flex;
+    justify-content: space-evenly;
+    
+    font-family: 'Familjen Grotesk';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 15px;
+    line-height: 19px;
+    color: #4F7578;
+    
+  }
+  
+  .order-number-two {
+	  position: absolute;
+    width: 880px;
+    height: 43px;
+    left: 70px;
+    top: 200px;
+    background: #FFFFFF;
+	display: flex;
+    justify-content: space-evenly;
+    
+    font-family: 'Familjen Grotesk';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 15px;
+    line-height: 19px;
+    color: #4F7578;
+
+}
+
+
+  
+  #print-button {
+	
+	position: absolute;
+	width: 227px;
+	height: 56px;
+	left: 1172px;
+	top: 746px;
+	
+	background: #DCDED4;
+
+  }
+  
+ 
+ #print-button button {
+	margin: 3.5px;
+    width: 221px;
+    height: 50px;
+    background-color: white;
+    color: #4F7578;
+    border: none;
+    border-radius: 50%;
+    cursor: pointer;
+    font-family: 'Fascinate';
+    font-style: normal;
+    font-weight: 900;
+    font-size: 20px;
+    line-height: 27px;
+  }
