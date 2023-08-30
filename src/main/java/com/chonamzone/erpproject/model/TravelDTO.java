@@ -14,23 +14,23 @@ import lombok.Setter;
 public class TravelDTO {
 
 	
-	private int d_seq;
+	private int dSeq;
 	
-	private String t_location;
+	private String tLocation;
 	
-	private String t_reason;
+	private String tReason;
 	
-	private String t_accommodation;
+	private String tAccommodation;
 	
-	private int t_trans_cost;
+	private int tTransCost;
 	
-	private int t_food_cost;
+	private int tFoodCost;
 	
-	private int t_accommodation_cost;
+	private int tAccommodationCost;
 	
-	private int t_etc_cost;
+	private int tEtcCost;
 	
-	private String t_start_date;
+	private String tStartDate;
 	
-	private String t_end_date;
+	private String tEndDate;
 }
