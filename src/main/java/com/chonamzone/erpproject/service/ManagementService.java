@@ -12,6 +12,6 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public class ManagementService {
 	
-	private final ManagementMapper managementMapper;
+//	private final ManagementMapper managementMapper;
 		
 }

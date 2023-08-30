@@ -14,7 +14,7 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public class ManagementApiController {
 	
-	private final ManagementService managementService;
+	//private final ManagementService managementService;
 	
 
 }
