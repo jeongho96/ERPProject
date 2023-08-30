@@ -16,5 +16,4 @@ public class ManagementApiController {
 	
 	private final ManagementService managementService;
 	
-
 }

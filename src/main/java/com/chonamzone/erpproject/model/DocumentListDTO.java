@@ -1,5 +1,7 @@
 package com.chonamzone.erpproject.model;
 
+import java.util.List;
+
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -19,5 +21,7 @@ public class DocumentListDTO {
 	private int dDrafterId;						// 기안자
 	
 	private String dCatetory;					// 문서 종류 (휴가신청서/출장보고서)
+	
+	private List<ApproversDTO> approversList;
 
 }
