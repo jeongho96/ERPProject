@@ -7,4 +7,16 @@
 		FROM users
 		WHERE u_id = #{id}
 	</select>
+	
+	<select id="getUserById" resultType="com.chonamzone.erpproject.model.UserDTO">
+        SELECT * FROM USERS
+        WHERE U_ID= #{uId}
+    </select>
+    
+    <!-- password encoding -->
+    <update id="updatePwd">
+        UPDATE USERS
+        SET U_PWD = #{uPwd}
+        WHERE U_ID = #{uId}
+    </update>
 </mapper>
