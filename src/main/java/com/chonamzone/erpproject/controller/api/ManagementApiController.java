@@ -1,6 +1,9 @@
 package com.chonamzone.erpproject.controller.api;
-
+/**
+ * 기안서 통합 관리 API
+ */
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -33,7 +36,7 @@ public class ManagementApiController {
 	
 	
 	@GetMapping("/api/management/vacations/{dSeq}")
-	public VacationDTO getManagementVacation(@PathVariable int dSeq) {
+	public Map<String, Object> getManagementVacation(@PathVariable int dSeq) {
 		return managementService.getManagementVacation(dSeq);
 	}
 	
