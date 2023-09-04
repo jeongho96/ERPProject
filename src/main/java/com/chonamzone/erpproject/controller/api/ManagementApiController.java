@@ -22,7 +22,6 @@ public class ManagementApiController {
 	
 	@GetMapping("/api/management/all")
 	public List<DocumentListDTO.Response> getManagementList(@RequestParam int page){
-		// page 시작 1로 가정
 		return managementService.getManagementList(page);
 	}
 	
@@ -37,5 +36,7 @@ public class ManagementApiController {
 	public VacationDTO getManagementVacation(@PathVariable int dSeq) {
 		return managementService.getManagementVacation(dSeq);
 	}
+	
+	
 	
 }
