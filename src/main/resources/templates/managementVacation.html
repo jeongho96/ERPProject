@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="EUC-KR">
+	<title>Insert title here</title>
+	<script src="/js/documentVacation.js"></script>
+	<link rel="stylesheet" href="/css/managementVacation.css">
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+
+<body>
+<div>
+	<div th:replace="layout/header.html :: header"></div>
+
+	<div class="container-fluid ">
+	    <div class="row">
+	        <!-- Menu Section -->
+	        <div th:replace="layout/menu.html :: div"></div>
+	
+	
+	        <!-- Content Section -->
+	        <div class="col-md-10 bg-light bg-gradient h-auto">
+	            <div id="top">기안서 작성</div>
+	
+	
+	            <form>
+	                <div id="meddle">
+	                    <!-- 왼쪽. -->
+	                    <div>
+	                        <!-- 일자선택  -->
+	                        <div id="dateInputContainer">
+	                            <label for="dateInput">일자 </label>
+	                            <input type="date" id="dateInput" name="dateInput">
+	                        </div>
+	
+	                        <!-- 구분선택. -->
+	                        <div id="requestTypeContainer" class="form-field">
+	                            <label for="requestType">구분 </label>
+	                            <select id="requestType" name="requestType">
+	                                <option value="vacation">휴가신청서</option>
+	                                <option value="businessTrip">출장신청서</option>
+	                            </select>
+	                        </div>
+	
+	                        <!-- 부서선택. -->
+	                        <div id="departmentContainer" class="form-field">
+	                            <label for="department">결제자 </label>
+	                            <div id="departmentselect">
+	                                <div id="department-one">
+	                                    <select id="department" name="department">
+	                                        <option value="design">디자인팀</option>
+	                                        <option value="hr">인사팀</option>
+	                                        <option value="development">개발팀</option>
+	                                    </select>
+	                                    <select id="teamLeader" name="teamLeader">
+	                                        <option value="kimCEO">김사장</option>
+	                                        <option value="kimTeamLeader">김팀장</option>
+	                                        <option value="goTeamLeader">고도리</option>
+	                                    </select>
+	                                </div>
+	                                <div id="department-two">
+	                                    <select id="department" name="department">
+	                                        <option value="design">디자인팀</option>
+	                                        <option value="hr">인사팀</option>
+	                                        <option value="development">개발팀</option>
+	                                    </select>
+	                                    <select id="teamLeader" name="teamLeader">
+	                                        <option value="kimCEO">김사장</option>
+	                                        <option value="kimTeamLeader">김팀장</option>
+	                                        <option value="goTeamLeader">고도리</option>
+	                                    </select>
+	                                </div>
+	                                <div id="department-three">
+	                                    <select id="department" name="department">
+	                                        <option value="design">디자인팀</option>
+	                                        <option value="hr">인사팀</option>
+	                                        <option value="development">개발팀</option>
+	                                    </select>
+	                                    <select id="teamLeader" name="teamLeader">
+	                                        <option value="kimCEO">김사장</option>
+	                                        <option value="kimTeamLeader">김팀장</option>
+	                                        <option value="goTeamLeader">고도리</option>
+	                                    </select>
+	                                </div>
+	
+	                            </div>
+	                        </div>
+	                    </div>
+	
+	                    <!-- 오른쪽. -->
+	                    <div id="right">
+	                        <!-- 휴가신청서 작성. -->
+	                        <div id="rest">휴가신청서</div>
+	                        <table>
+	                            <tr>
+	                                <td><span class="info-label">부서</span></td>
+	                                <td><input class="info-input" type="text" name="department"></td>
+	                            </tr>
+	                            <tr>
+	                                <td><span class="info-label">성명</span></td>
+	                                <td><input class="info-input" type="text" name="name"></td>
+	                            </tr>
+	                            <tr>
+	                                <td><span class="info-label">직위</span></td>
+	                                <td><input class="info-input" type="text" name="position"></td>
+	                            </tr>
+	                            <tr>
+	                                <td><span class="info-label">종류</span></td>
+	                                <td>
+	                                    <label><input type="checkbox" name="category" value="연차"> 연차</label>
+	                                    <label><input type="checkbox" name="category" value="월차"> 월차</label>
+	                                    <label><input type="checkbox" name="category" value="보건"> 보건</label>
+	                                    <label><input type="checkbox" name="category" value="특별"> 특별</label>
+	                                    <label><input type="checkbox" name="category" value="공가"> 공가</label>
+	                                </td>
+	                            </tr>
+	                            <tr>
+	                                <td><span class="info-label">사유</span></td>
+	                                <td><input class="info-input" type="text" name="reason"></td>
+	                            </tr>
+	                            <tr>
+	                                <td><span class="info-label">기간</span></td>
+	                                <td>
+	                                    <input class="info-input" type="date" name="startDate" id="startDate"> ~
+	                                    <input class="info-input" type="date" name="endDate" id="endDate">
+	                                    <span id="dateWarning"></span>
+	                                </td>
+	                            </tr>
+	                            <tr>
+	                                <td><span class="info-label">비상연락망</span></td>
+	                                <td><input class="info-input" type="text" name="emergencyContact"></td>
+	                            </tr>
+	                        </table>
+	
+	
+	                        <div id="low-lable">
+	                            <p>위와 같이 휴가를 신청하오니 승인하여 주시기 바랍니다.</p>
+	                            <p><span id="date"></span></p>
+	                            <p>성명 <input type="text" name="applicantName"></p>
+	                            <p>승인 <input type="text" name="approval"></p>
+	                        </div>
+	                    </div>
+	
+		                
+	                </div>
+	                <!-- 마무리단계. -->
+		                <div id="under">
+		                    <div class="under-one">
+		                        <input type="submit" value="제출">
+		                    </div>
+		                    <div class="under-two">
+		                        <input type="submit" value="취소">
+		                    </div>
+		                </div>
+	            </form>
+	        </div>
+	    </div>
+	</div>
+	<script src="/js/managementVacation.js"></script>
+	<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@1.16.1/dist/umd/popper.min.js"></script>
+	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>
