@@ -1,0 +1,90 @@
+#top {
+	display:flex; 
+	justify-content: space-between;
+	margin-top: 3%;
+}
+
+.title {
+	float:left;
+}
+
+.title span {
+	/* 기안서 통합 관리 */	
+	font-family: 'Fascinate';
+	font-style: normal;
+	font-weight: 900;
+	font-size: 20px;
+	line-height: 27px;
+	
+	color: #4F7578;
+}
+
+.search-box {
+	/* Rectangle 26 */
+	float: right;
+	width: 412px;
+	height: 36px;
+	left: 987px;
+	top: 165px;
+
+	
+	background: #DCDED4;
+}
+
+.search-box input{
+	margin-top: 1%;
+	float: left;
+	width: 350px;
+	border: none; 
+	background: transparent;
+}
+
+.search-box button {
+	float: right;
+	margin: 3.5px;
+   /* width: 221px;
+    height: 50px;*/
+    background-color: white;
+    color: #4F7578;
+    border: none;
+    border-radius: 50%;
+    cursor: pointer;
+    font-family: 'Fascinate';
+    font-style: normal;
+    font-weight: 900;
+    /*font-size: 20px;*/
+    line-height: 27px;
+}
+
+#select-status {
+	/* Rectangle 27 */
+	margin-top: 3%;
+	width: 250px;
+	height: 36px;
+	left: 366px;
+	top: 245px;
+	
+	background: #DCDED4;
+}
+
+#select-status a {
+	/* 전체 진행중 반려 결제 */
+	margin-top: 1%;
+	padding-left: 7%;
+	width: 457px;
+	/*height: 21px;*/
+	left: 389px;
+	top: 250px;
+	
+	font-family: 'Fascinate';
+	font-style: normal;
+	font-weight: 900;
+	line-height: 27px;
+	
+	color: #4F7578;
+
+
+}
+
+
+
