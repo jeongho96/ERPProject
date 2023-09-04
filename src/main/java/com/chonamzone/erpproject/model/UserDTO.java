@@ -2,13 +2,9 @@ package com.chonamzone.erpproject.model;
 
 import java.util.List;
 
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.Data;
 
-@Getter
-@Setter
-@NoArgsConstructor
+@Data
 public class UserDTO {
 	
 	private int uId;														// 유저식별자 	
