@@ -6,7 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.chonamzone.erpproject.mapper.MyApprovalMapper;
-import com.chonamzone.erpproject.model.MyApprovalDto;
+import com.chonamzone.erpproject.model.MyApprovalDTO;
 
 @Service
 
@@ -19,14 +19,14 @@ public class MyApprovalService {
 		this.myapprovalmapper = myapprovalmapper;
 	}
 	
-    public List<MyApprovalDto> getAll() {
+    public List<MyApprovalDTO> getAll() {
         return myapprovalmapper.selectByIdAll();
     }
 
-    public List<MyApprovalDto> getPaged(int page, int perPage, int loginid) {
+    public List<MyApprovalDTO> getPaged(int page, int perPage, int loginid) {
         int start = (page - 1) * perPage;
         int end = start + perPage;
-        List<MyApprovalDto> MADto = myapprovalmapper.selectPaged(start, end, loginid);
+        List<MyApprovalDTO> MADto = myapprovalmapper.selectPaged(start, end, loginid);
         return MADto;
     }
     
@@ -37,8 +37,8 @@ public class MyApprovalService {
         return totalPages;
     }
     
-    public MyApprovalDto select(int dnum, int loginId) {
-    	MyApprovalDto dselect = myapprovalmapper.select(dnum, loginId); 
+    public MyApprovalDTO select(int dnum, int loginId) {
+    	MyApprovalDTO dselect = myapprovalmapper.select(dnum, loginId); 
     	return dselect;
     }
 	;

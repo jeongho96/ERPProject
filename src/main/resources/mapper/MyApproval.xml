@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper
+	namespace="com.chonamzone.erpproject.mapper.MyApprovalMapper">	<!-- xml파일을 사용할 mapper가 있는 경로 -->
+	<resultMap id="appResultMap"
+		type="com.chonamzone.erpproject.model.MyApprovalDto">
+		<result property="doctype" column="dCategory" />
+		<result property="dSeq" column="dSeq" />
+		<result property="dId" column="dDrafterId" />
+		<result property="aId" column="aApproverId" />
+		<result property="date" column="dDraftingDate" />
+		<result property="dStatus" column="dStatus" />
+	</resultMap>
+
+
+
+	<select id="selectByIdAll" resultMap="appResultMap">
+		SELECT d.* ,
+		a.a_approver_id
+		FROM document_list d
+		JOIN
+		approvers a ON d.d_seq =
+		a.d_seq
+	</select>
+
+	<select id="selectIdProceed" parameterType="map"
+		resultMap="appResultMap">
+		SELECT d.* , a.a_approver_id
+		FROM document_list d
+		JOIN
+		approvers a ON d.d_seq = a.d_seq
+		WHERE (d.d_drafter_id = #{id} OR
+		a.a_approver_id = #{id}) and d_status = #{status} ;
+	</select>
+
+	<select id="selectPaged" resultMap="appResultMap"
+		parameterType="map">
+		SELECT * FROM (
+		SELECT ROWNUM AS rnum, doc.*
+		FROM (
+		SELECT
+		d.* , a.a_approver_id
+		FROM document_list d
+		JOIN approvers a ON d.d_seq
+		=
+		a.d_seq
+		) doc
+		)
+		WHERE (rnum &gt;= #{start} AND rnum &lt;= #{end})
+		and
+		(a_approver_id = #{id} or d_drafter_id = #{id})
+	</select>
+
+	<select id="getTotalPosts" resultType="int">
+		SELECT COUNT(*) FROM (
+		SELECT
+		d.* , a.a_approver_id
+		FROM document_list d
+		JOIN approvers a ON d.d_seq
+		=
+		a.d_seq
+		where (a_approver_id = #{id} or d_drafter_id = #{id})
+		)
+	</select>
+
+	<select id="select" resultMap="appResultMap" parameterType="map">
+
+		SELECT
+		d.* , a.a_approver_id
+		FROM document_list d
+		JOIN approvers a ON
+		d.d_seq
+		=
+		a.d_seq
+		where d.d_seq = #{dnum} and a.a_approver_id = #{id}
+	</select>
+
+
+
+</mapper>
