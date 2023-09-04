@@ -51,20 +51,26 @@
 		AND rn &lt;= #{endPage}
 	</select>  
 
-	<select id="getManagementTravel" resultType="TravelDTO" parameterType="int">
+	<select id="getTravelByDSeq" resultType="TravelDTO" parameterType="int">
 		SELECT *
 		FROM travels
 		WHERE d_seq = #{dSeq}
 	</select>
 	
 	
-	<select id="getManagementVacation" resultType="VacationDTO" parameterType="int">
+	<select id="getVacationByDSeq" resultType="VacationDTO" parameterType="int">
 		SELECT *
 		FROM vacations
 		WHERE d_seq = #{dSeq}
 	</select>
 	
-	
+	<select id="getApproverDetailsListByDSeq" resultType="com.chonamzone.erpproject.model.ApproversDTO$Details" parameterType="int">
+		SELECT a.a_approver_id, u.u_name AS u_name, p.p_name AS p_name
+		FROM approvers a
+		INNER JOIN users u ON a.a_approver_id = u.u_id
+		INNER JOIN partnames p ON u.p_id = p.p_id
+		WHERE a.d_seq = #{dSeq}
+	</select>
 	
 
 </mapper>

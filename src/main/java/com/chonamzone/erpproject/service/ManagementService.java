@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import com.chonamzone.erpproject.mapper.ManagementMapper;
 import com.chonamzone.erpproject.mapper.UserMapper;
+import com.chonamzone.erpproject.model.ApproversDTO;
 import com.chonamzone.erpproject.model.DocumentListDTO;
 import com.chonamzone.erpproject.model.TravelDTO;
 import com.chonamzone.erpproject.model.VacationDTO;
@@ -50,11 +51,20 @@ public class ManagementService {
 	
 	
 	public TravelDTO getManagementTravel(int dSeq) {
-		return managementMapper.getManagementTravel(dSeq);
+		return managementMapper.getTravelByDSeq(dSeq);
 	}
 	
-	public VacationDTO getManagementVacation(int dSeq) {
-		return managementMapper.getManagementVacation(dSeq);
+	public Map<String, Object> getManagementVacation(int dSeq) {
+		Map<String, Object> map = new HashMap<>();
+		
+		List<ApproversDTO.Details> approverList = managementMapper.getApproverDetailsListByDSeq(dSeq);
+		VacationDTO vacationDTO = managementMapper.getVacationByDSeq(dSeq);
+		
+		map.put("approverList", approverList);
+		map.put("vacationDTO", vacationDTO);
+		
+		return map;
+		
 	}
 
 		
