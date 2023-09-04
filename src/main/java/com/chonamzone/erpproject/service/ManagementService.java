@@ -27,8 +27,8 @@ public class ManagementService {
 		Map<String, Integer> pagination = new HashMap<>();
 		
 		// ROWNUM은 1부터 시작
-		pagination.put("startPage", (page-1)*3+1);
-		pagination.put("endPage", page*3);
+		pagination.put("startPage", (page-1)*10+1);
+		pagination.put("endPage", page*10);
 
 		List<DocumentListDTO.MapperData> documentMapperList = managementMapper.getManagementList(pagination);
 		List<DocumentListDTO.Response> documentResponseList = new ArrayList<>();
