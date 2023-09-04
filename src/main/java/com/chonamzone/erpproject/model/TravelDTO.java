@@ -1,5 +1,7 @@
 package com.chonamzone.erpproject.model;
 
+import java.time.LocalDate;
+
 //이곳은 출장신청서 모델 테이블이다.
 //컬럼명에 노란줄은 아직 사용전이라 뜨는 것이다.
 //컨트롤러 따로 / 모델안에 서비스, DAO, DTO /뷰는 template 이다. 
@@ -12,8 +14,6 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 public class TravelDTO {
-
-	
 	private int dSeq;
 	
 	private String tLocation;
@@ -30,7 +30,7 @@ public class TravelDTO {
 	
 	private int tEtcCost;
 	
-	private String tStartDate;
+	private LocalDate tStartDate;
 	
-	private String tEndDate;
+	private LocalDate tEndDate;
 }

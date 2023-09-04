@@ -1,5 +1,6 @@
 package com.chonamzone.erpproject.model;
 
+import java.time.LocalDate;
 import java.util.List;
 
 import lombok.Data;
@@ -19,7 +20,7 @@ public class UserDTO {
 	
 	private String uEmail;											// 사내 이메일
 	
-	private String uHireDate;										// 입사일
+	private LocalDate uHireDate;										// 입사일
 	
 	private int pId;														// 부서 식별자
 		
