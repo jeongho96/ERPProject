@@ -8,7 +8,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import com.chonamzone.erpproject.model.MyApprovalDto;
+import com.chonamzone.erpproject.model.MyApprovalDTO;
 import com.chonamzone.erpproject.service.MyApprovalService;
 
 
@@ -26,14 +26,14 @@ public class MyApprovalController {
 
 		int perPage = 10; // 페이지당 항목 수
 
-        List<MyApprovalDto> posts = myApprovalService.getPaged(page, perPage, loginid);
+        List<MyApprovalDTO> posts = myApprovalService.getPaged(page, perPage, loginid);
         int totalPages = myApprovalService.getTotalPages(perPage, loginid);
 
         model.addAttribute("posts", posts);
         model.addAttribute("currentPage", page);
         model.addAttribute("totalPages", totalPages);
         
-        List<MyApprovalDto> mylist = myApprovalService.getPaged(page, perPage, loginid);
+        List<MyApprovalDTO> mylist = myApprovalService.getPaged(page, perPage, loginid);
         model.addAttribute("mylist", mylist);
 		
         return "list";
@@ -42,7 +42,7 @@ public class MyApprovalController {
     @GetMapping("/testdoc")
     public String myApprovalDoc(@RequestParam int dnum, Model model) {
 
-    	MyApprovalDto Dto = myApprovalService.select(dnum, loginid);
+    	MyApprovalDTO Dto = myApprovalService.select(dnum, loginid);
     	
     	model.addAttribute("mylist", Dto);
     	
