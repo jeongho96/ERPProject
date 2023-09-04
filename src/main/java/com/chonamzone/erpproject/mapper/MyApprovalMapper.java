@@ -12,7 +12,9 @@ public interface MyApprovalMapper {
 
 	List<MyApprovalDto> selectByIdAll();
 	public void selectIdProceed(String id, String status); 
-	
-    List<MyApprovalDto> selectPaged(int start, int end);
+	MyApprovalDto select(int dnum,int id);
+    List<MyApprovalDto> selectPaged(int start, int end, int id);
+    
+    int getTotalPosts(int id);
 
 }

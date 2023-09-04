@@ -23,11 +23,24 @@ public class MyApprovalService {
         return myapprovalmapper.selectByIdAll();
     }
 
-    public List<MyApprovalDto> getPaged(int page, int perPage) {
+    public List<MyApprovalDto> getPaged(int page, int perPage, int loginid) {
         int start = (page - 1) * perPage;
         int end = start + perPage;
-        return myapprovalmapper.selectPaged(start, end);
+        List<MyApprovalDto> MADto = myapprovalmapper.selectPaged(start, end, loginid);
+        return MADto;
     }
-	
+    
+    public int getTotalPages(int perPage, int loginId) {
+        int totalPosts = myapprovalmapper.getTotalPosts(loginId); // Implement this method in the mapper
+        int totalPages = (int) Math.ceil((double) totalPosts / perPage);
+        
+        return totalPages;
+    }
+    
+    public MyApprovalDto select(int dnum, int loginId) {
+    	MyApprovalDto dselect = myapprovalmapper.select(dnum, loginId); 
+    	return dselect;
+    }
+	;
 	
 }

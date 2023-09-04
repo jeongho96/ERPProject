@@ -15,16 +15,17 @@
 
 
 
-	<select id="selectByIdAll"
-		resultType="com.chonamzone.erpproject.model.MyApprovalDto">
-		SELECT d.* , a.a_approver_id
+	<select id="selectByIdAll" resultMap="appResultMap">
+		SELECT d.* ,
+		a.a_approver_id
 		FROM document_list d
 		JOIN
-		approvers a ON d.d_seq = a.d_seq
+		approvers a ON d.d_seq =
+		a.d_seq
 	</select>
 
 	<select id="selectIdProceed" parameterType="map"
-		resultType="com.chonamzone.erpproject.model.MyApprovalDto">
+		resultMap="appResultMap">
 		SELECT d.* , a.a_approver_id
 		FROM document_list d
 		JOIN
@@ -33,7 +34,8 @@
 		a.a_approver_id = #{id}) and d_status = #{status} ;
 	</select>
 
-	<select id="selectPaged" resultType="appResultMap" parameterType="map">
+	<select id="selectPaged" resultMap="appResultMap"
+		parameterType="map">
 		SELECT * FROM (
 		SELECT ROWNUM AS rnum, doc.*
 		FROM (
@@ -45,7 +47,33 @@
 		a.d_seq
 		) doc
 		)
-		WHERE rnum &gt;= #{start} AND rnum &lt;= #{end}
+		WHERE (rnum &gt;= #{start} AND rnum &lt;= #{end})
+		and
+		(a_approver_id = #{id} or d_drafter_id = #{id})
+	</select>
+
+	<select id="getTotalPosts" resultType="int">
+		SELECT COUNT(*) FROM (
+		SELECT
+		d.* , a.a_approver_id
+		FROM document_list d
+		JOIN approvers a ON d.d_seq
+		=
+		a.d_seq
+		where (a_approver_id = #{id} or d_drafter_id = #{id})
+		)
+	</select>
+
+	<select id="select" resultMap="appResultMap" parameterType="map">
+
+		SELECT
+		d.* , a.a_approver_id
+		FROM document_list d
+		JOIN approvers a ON
+		d.d_seq
+		=
+		a.d_seq
+		where d.d_seq = #{dnum} and a.a_approver_id = #{id}
 	</select>
 
 
