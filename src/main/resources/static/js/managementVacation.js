@@ -2,15 +2,13 @@ document.addEventListener("DOMContentLoaded", function(){
 	
 	var dSeq = location.pathname;
 	dSeq = dSeq.replace("/management/vacations/", "");
-	
-
 
 	$.ajax({
 		url: "/api/management/vacations/" + dSeq,
 		type: "GET"
 	}).done(function(data){
-		
 		document.getElementById("startDate").value = data.vstartDate;
+	
 		
 		
 		/*{

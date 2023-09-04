@@ -15,8 +15,6 @@ document.addEventListener("DOMContentLoaded", function(){
 		contents += "</tr>";
 		
 		for(var i=0; i<data.length; i++){
-			
-			
 			contents += "<tr>";
 			contents += "<td>" + data[i].ddraftingDate + "</td>";
 			contents += "<td>" + data[i].dcategory +"</td>";
