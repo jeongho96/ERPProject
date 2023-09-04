@@ -16,4 +16,13 @@ public class ApproversDTO {
 	private String aApproverState;
 	
 	private int dSeq;
+	
+	
+	@Getter
+	@Setter
+	public static class Details {
+		private int aApproverId;
+		private String uName;
+		private String pName;
+	}
 }
