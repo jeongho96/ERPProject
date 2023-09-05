@@ -53,5 +53,11 @@
 	</select>  
 	
 	
-	<!-- <select id="getDocumentListByDSeq" resultType="" --> 
+	<select id="getDocumentListByDSeq" resultMap="ManagementListResultMap" parameterType="int">
+		SELECT *
+		FROM document_list
+		WHERE d_seq = #{dSeq}
+	</select> 
+
+	
 </mapper>
