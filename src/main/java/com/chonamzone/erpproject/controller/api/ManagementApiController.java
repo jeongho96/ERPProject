@@ -24,7 +24,7 @@ public class ManagementApiController {
 	private final ManagementService managementService;
 	
 	@GetMapping("/api/management/all")
-	public List<DocumentListDTO.Response> getManagementList(@RequestParam int page){
+	public List<DocumentListDTO.MGResponse> getManagementList(@RequestParam int page){
 		return managementService.getManagementList(page);
 	}
 	

@@ -15,6 +15,7 @@ import com.chonamzone.erpproject.mapper.VacationMapper;
 import com.chonamzone.erpproject.model.ApproverDTO;
 import com.chonamzone.erpproject.model.DocumentListDTO;
 import com.chonamzone.erpproject.model.TravelDTO;
+import com.chonamzone.erpproject.model.UserDTO;
 import com.chonamzone.erpproject.model.VacationDTO;
 
 import lombok.RequiredArgsConstructor;
@@ -30,7 +31,7 @@ public class ManagementService {
 	private final UserMapper userMapper;
 	
 
-	public List<DocumentListDTO.Response> getManagementList(int page) {
+	public List<DocumentListDTO.MGResponse> getManagementList(int page) {
 		Map<String, Integer> pagination = new HashMap<>();
 		
 		// ROWNUM은 1부터 시작
@@ -38,11 +39,11 @@ public class ManagementService {
 		pagination.put("endPage", page*10);
 
 		List<DocumentListDTO.MapperData> documentMapperList = documentListMapper.getManagementList(pagination);
-		List<DocumentListDTO.Response> documentResponseList = new ArrayList<>();
+		List<DocumentListDTO.MGResponse> documentResponseList = new ArrayList<>();
 		
 		
 		for(DocumentListDTO.MapperData documentDTO : documentMapperList) {
-			DocumentListDTO.Response documentResponse = new DocumentListDTO.Response(documentDTO);
+			DocumentListDTO.MGResponse documentResponse = new DocumentListDTO.MGResponse(documentDTO);
 			
 			String drafterName = userMapper.getNameById(documentDTO.getDDrafterId());
 			String approverName = userMapper.getNameById(documentDTO.getAApproverId());
@@ -63,13 +64,15 @@ public class ManagementService {
 	public Map<String, Object> getManagementVacation(int dSeq) {
 		Map<String, Object> map = new HashMap<>();
 		
-		/* managementMapper.get */
-		List<ApproverDTO.Details> approverList = approverMapper.getApproverDetailsListByDSeq(dSeq);
+		DocumentListDTO.MapperData documentListDTO = documentListMapper.getDocumentListByDSeq(dSeq);
+		List<ApproverDTO.MGResponse> approverList = approverMapper.getApproverDetailsListByDSeq(dSeq);
 		VacationDTO vacationDTO = vacationMapper.getVacationByDSeq(dSeq);
-		/*UserDTO userDTO = userMapper.getUserById(dSeq)*/
+		UserDTO.MGResponse userDTO = userMapper.getUserWithPartnameById(documentListDTO.getDDrafterId());
 		
+		map.put("documentListDTO", documentListDTO);
 		map.put("approverList", approverList);
 		map.put("vacationDTO", vacationDTO);
+		map.put("userDTO", userDTO); 
 		
 		return map;
 		

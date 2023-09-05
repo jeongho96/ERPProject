@@ -20,7 +20,7 @@ public class ApproverDTO {
 	
 	@Getter
 	@Setter
-	public static class Details {
+	public static class MGResponse {
 		private int aApproverId;
 		private String uName;
 		private String pName;

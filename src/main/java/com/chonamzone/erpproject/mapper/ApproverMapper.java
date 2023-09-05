@@ -8,5 +8,5 @@ import com.chonamzone.erpproject.model.ApproverDTO;
 
 @Mapper
 public interface ApproverMapper {
-	public List<ApproverDTO.Details> getApproverDetailsListByDSeq(int dSeq);
+	public List<ApproverDTO.MGResponse> getApproverDetailsListByDSeq(int dSeq);
 }

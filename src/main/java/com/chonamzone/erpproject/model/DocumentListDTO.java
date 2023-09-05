@@ -29,7 +29,7 @@ public class DocumentListDTO {
 	@Getter
 	@NoArgsConstructor
 	@AllArgsConstructor
-	public static class Response {
+	public static class MGResponse {
 		private int dSeq;
 		private LocalDate dDraftingDate;				// 기안 일자
 		private String dStatus;								// 진행 상태
@@ -40,7 +40,7 @@ public class DocumentListDTO {
 		private String aApproverState;					// 결재 여부
 		
 	
-		public Response(MapperData mapperData) {
+		public MGResponse(MapperData mapperData) {
 			this.dSeq = mapperData.getDSeq();
 			this.dDraftingDate = mapperData.getDDraftingDate();
 			this.dStatus = mapperData.getDStatus();
