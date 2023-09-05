@@ -19,4 +19,14 @@
         SET U_PWD = #{uPwd}
         WHERE U_ID = #{uId}
     </update>
+    
+    <select id="getUserWithPartnameById" resultType="com.chonamzone.erpproject.model.UserDTO$MGResponse" parameterType="int">
+    	SELECT p.p_name as p_name, u.u_name as u_name, u.u_position as u_position
+		FROM users u
+		INNER JOIN partnames p
+		ON u.p_id = p.p_id
+		WHERE u_id = #{uId}
+    </select>
+    
+    
 </mapper>

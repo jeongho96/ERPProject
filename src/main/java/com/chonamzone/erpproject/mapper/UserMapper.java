@@ -11,4 +11,6 @@ public interface UserMapper {
 	// 로그인
 	public UserDTO getUserById(int uId);
 	public void updatePwd(int uId, String uPwd);
+	
+	public UserDTO.MGResponse getUserWithPartnameById(int uId);
 }
