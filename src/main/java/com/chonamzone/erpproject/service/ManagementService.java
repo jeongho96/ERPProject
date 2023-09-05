@@ -7,9 +7,12 @@ import java.util.Map;
 
 import org.springframework.stereotype.Service;
 
-import com.chonamzone.erpproject.mapper.ManagementMapper;
+import com.chonamzone.erpproject.mapper.ApproverMapper;
+import com.chonamzone.erpproject.mapper.DocumentListMapper;
+import com.chonamzone.erpproject.mapper.TravelMapper;
 import com.chonamzone.erpproject.mapper.UserMapper;
-import com.chonamzone.erpproject.model.ApproversDTO;
+import com.chonamzone.erpproject.mapper.VacationMapper;
+import com.chonamzone.erpproject.model.ApproverDTO;
 import com.chonamzone.erpproject.model.DocumentListDTO;
 import com.chonamzone.erpproject.model.TravelDTO;
 import com.chonamzone.erpproject.model.VacationDTO;
@@ -20,7 +23,10 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public class ManagementService {
 	
-	private final ManagementMapper managementMapper;
+	private final DocumentListMapper  documentListMapper;
+	private final ApproverMapper approverMapper; 
+	private final TravelMapper travelMapper;
+	private final VacationMapper vacationMapper;
 	private final UserMapper userMapper;
 	
 
@@ -31,7 +37,7 @@ public class ManagementService {
 		pagination.put("startPage", (page-1)*10+1);
 		pagination.put("endPage", page*10);
 
-		List<DocumentListDTO.MapperData> documentMapperList = managementMapper.getManagementList(pagination);
+		List<DocumentListDTO.MapperData> documentMapperList = documentListMapper.getManagementList(pagination);
 		List<DocumentListDTO.Response> documentResponseList = new ArrayList<>();
 		
 		
@@ -51,14 +57,16 @@ public class ManagementService {
 	
 	
 	public TravelDTO getManagementTravel(int dSeq) {
-		return managementMapper.getTravelByDSeq(dSeq);
+		return travelMapper.getTravelByDSeq(dSeq);
 	}
 	
 	public Map<String, Object> getManagementVacation(int dSeq) {
 		Map<String, Object> map = new HashMap<>();
 		
-		List<ApproversDTO.Details> approverList = managementMapper.getApproverDetailsListByDSeq(dSeq);
-		VacationDTO vacationDTO = managementMapper.getVacationByDSeq(dSeq);
+		/* managementMapper.get */
+		List<ApproverDTO.Details> approverList = approverMapper.getApproverDetailsListByDSeq(dSeq);
+		VacationDTO vacationDTO = vacationMapper.getVacationByDSeq(dSeq);
+		/*UserDTO userDTO = userMapper.getUserById(dSeq)*/
 		
 		map.put("approverList", approverList);
 		map.put("vacationDTO", vacationDTO);

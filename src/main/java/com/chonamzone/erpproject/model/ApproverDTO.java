@@ -5,7 +5,7 @@ import lombok.Setter;
 
 @Getter
 @Setter
-public class ApproversDTO {
+public class ApproverDTO {
 	
 	private int aSeq;
 	

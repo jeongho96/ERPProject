@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="com.chonamzone.erpproject.mapper.ManagementMapper">	<!-- xml파일을 사용할 mapper가 있는 경로 -->
+<mapper namespace="com.chonamzone.erpproject.mapper.DocumentListMapper">	<!-- xml파일을 사용할 mapper가 있는 경로 -->
+
 	<!-- <resultMap id="DocumentListResultMap" type="com.chonamzone.myerpproject.model.DocumentListDTO$MapperData">
 		<id property="dSeq" column="d_seq" />
 		<result property="dDraftingDate" column="d_drafting_date" />
@@ -16,19 +17,19 @@
 			<result property="dSeq" column="d_seq" />
 		</collection> 
 	</resultMap> -->
-	
+
 	<resultMap id="ManagementListResultMap" type="com.chonamzone.erpproject.model.DocumentListDTO$MapperData">
-		<id property="dSeq" column="d_seq" />
-		<result property="dDraftingDate" column="d_drafting_date" />
-		<result property="dStatus" column="d_status" />
-		<result property="dDrafterId" column="d_drafter_id" />
-		<result property="dCategory" column="d_category" />
-		<result property="aApproverId" column="a_approver_id" />
-		<result property="aOrderNum" column="a_order_num" />
-		<result property="aApproverState" column="a_approver_state" />
-
+			<id property="dSeq" column="d_seq" />
+			<result property="dDraftingDate" column="d_drafting_date" />
+			<result property="dStatus" column="d_status" />
+			<result property="dDrafterId" column="d_drafter_id" />
+			<result property="dCategory" column="d_category" />
+			<result property="aApproverId" column="a_approver_id" />
+			<result property="aOrderNum" column="a_order_num" />
+			<result property="aApproverState" column="a_approver_state" />
+	
 	</resultMap>
-
+	
 	
 	<select id="getManagementList" resultMap="ManagementListResultMap" parameterType="java.util.Map">
 		SELECT *
@@ -50,27 +51,7 @@
 		WHERE rn &gt;= #{startPage}
 		AND rn &lt;= #{endPage}
 	</select>  
-
-	<select id="getTravelByDSeq" resultType="TravelDTO" parameterType="int">
-		SELECT *
-		FROM travels
-		WHERE d_seq = #{dSeq}
-	</select>
 	
 	
-	<select id="getVacationByDSeq" resultType="VacationDTO" parameterType="int">
-		SELECT *
-		FROM vacations
-		WHERE d_seq = #{dSeq}
-	</select>
-	
-	<select id="getApproverDetailsListByDSeq" resultType="com.chonamzone.erpproject.model.ApproversDTO$Details" parameterType="int">
-		SELECT a.a_approver_id, u.u_name AS u_name, p.p_name AS p_name
-		FROM approvers a
-		INNER JOIN users u ON a.a_approver_id = u.u_id
-		INNER JOIN partnames p ON u.p_id = p.p_id
-		WHERE a.d_seq = #{dSeq}
-	</select>
-	
-
+	<!-- <select id="getDocumentListByDSeq" resultType="" --> 
 </mapper>
