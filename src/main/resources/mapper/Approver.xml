@@ -3,7 +3,7 @@
 
 <mapper namespace="com.chonamzone.erpproject.mapper.ApproverMapper">	<!-- xml파일을 사용할 mapper가 있는 경로 -->
 
-	<select id="getApproverDetailsListByDSeq" resultType="com.chonamzone.erpproject.model.ApproverDTO$Details" parameterType="int">
+	<select id="getApproverDetailsListByDSeq" resultType="com.chonamzone.erpproject.model.ApproverDTO$MGResponse" parameterType="int">
 		SELECT a.a_approver_id, u.u_name AS u_name, p.p_name AS p_name
 		FROM approvers a
 		INNER JOIN users u ON a.a_approver_id = u.u_id
