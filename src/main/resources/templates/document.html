@@ -1,46 +1,70 @@
 <!DOCTYPE html>
-<html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
-	<meta charset="EUC-KR">
-	<title>Insert title here</title>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Your Website</title>
 	<script src="/js/document.js"></script>
 	<link rel="stylesheet" href="/css/document.css">
+	<link rel="stylesheet"
+		href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 </head>
 <body>
-  
-  <div id="header">
-    기안서 작성
-  </div>
+	<!-- Include the header and menu from Thymeleaf fragments -->
+	<div th:replace="layout/header.html :: header"></div>
+	
 
-  <div class="table-container">
-    <table>
-      <tr class="order-number">
-        <th>정렬순서</th>
-        <th>양식명</th>
-        <th>구분</th>
-        <th>결제문서</th>
-      </tr>
-      <tr class="order-number-one">
-        <td>01</td>
-        <td><a href="http://localhost:8090/document/vacation">oo의 휴가 신청서</a></td>
-        <td>휴가 신청서</td>
-        <td>휴가 신청서</td>
-      </tr>
-      <tr class="order-number-two">
-        <td>02</td>
-        <td><a href="http://localhost:8090/document/travel">oo의 출장 신청서</a></td>
-        <td>출장 신청서</td>
-        <td>출장 신청서</td>
-      </tr>
-    </table>
-  </div>
+	 <!-- Menu and Content Section -->
+    <div class="container-fluid ">
+        <div class="row">
+            <!-- Menu Section -->
+            <div th:replace="layout/menu.html :: div"></div>
+            
+            
+           <!-- Content Section -->
+            <div class="col-md-10 bg-light bg-gradient h-auto">
+               	  <div id="header">
+				    기안서 작성
+				  </div>
+				
+				  <div class="table-container">
+				    <table>
+				      <tr class="order-number">
+				        <th>정렬순서</th>
+				        <th>양식명</th>
+				        <th>구분</th>
+				        <th>결제문서</th>
+				      </tr>
+				      <tr class="order-number-one">
+				        <td>01</td>
+				        <td><a href="http://localhost:8090/document/vacation">oo의 휴가 신청서</a></td>
+				        <td>휴가 신청서</td>
+				        <td>휴가 신청서</td>
+				      </tr>
+				      <tr class="order-number-two">
+				        <td>02</td>
+				        <td><a href="http://localhost:8090/document/travel">oo의 출장 신청서</a></td>
+				        <td>출장 신청서</td>
+				        <td>출장 신청서</td>
+				      </tr>
+				    </table>
+				  </div>
+				
+				  <div id="print-button">
+				
+				      <button onclick="printDocument()">인쇄</button>
+				
+				  </div>
+            </div>
+        </div>
+    </div>
 
-  <div id="print-button">
-
-      <button onclick="printDocument()">인쇄</button>
-
-  </div>
-  
-
+	<!-- Bootstrap JS and Popper.js Links (Required for Bootstrap) -->
+	<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+	<script
+		src="https://cdn.jsdelivr.net/npm/@popperjs/core@1.16.1/dist/umd/popper.min.js"></script>
+	<script
+		src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </body>
+
 </html>

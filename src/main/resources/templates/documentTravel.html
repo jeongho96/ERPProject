@@ -1,168 +1,172 @@
 <!DOCTYPE html>
-<html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
-<meta charset="EUC-KR">
-<title>Insert title here</title>
-<style>
-  body {
-    font-family: Arial, sans-serif;
-    background-color: white;
-    margin: 0;
-    padding: 0;
-    display: flex;
-    justify-content: flex-end;
-  }
-
-  .container {
-    width: 50%;
-    padding: 20px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    background-color: white;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  }
-
-  .header {
-    text-align: center;
-    margin-bottom: 20px;
-  }
-
-  .info-label {
-    font-weight: bold;
-  }
-
-  .info-input {
-    width: 100%;
-    padding: 5px;
-    margin-top: 5px;
-    border: 1px solid #ccc;
-    border-radius: 3px;
-  }
-
-  .footer {
-    margin-top: 20px;
-    text-align: right;
-  }
-
-  #under {
-    display: flex;
-    justify-content: space-between;
-    margin-top: 20px;
-  }
-
-  #under input[type="submit"] {
-    padding: 10px 20px;
-    background-color: #007bff;
-    color: white;
-    border: none;
-    border-radius: 3px;
-    cursor: pointer;
-  }
-</style>
-
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Your Website</title>
+	<script src="/js/documentTravel.js"></script>
+	<link rel="stylesheet" href="/css/documentTravel.css">
+	<!-- Bootstrap CSS Link -->
+	<link rel="stylesheet"
+	href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 </head>
 <body>
-<div>
-	<div id="top">기안서 작성</div>
+	<!-- Include the header and menu from Thymeleaf fragments -->
+	<div th:replace="layout/header.html :: header"></div>
+	
 
-		<div id="left">
-			<div>
-				<label for="dateInput">일자 :</label>
-				<input type="date" id="dateInput" name="dateInput">
-			</div>
-			<div>
-				<label for="requestType">구분 :</label>
-				  <select id="requestType" name="requestType">
-					<option value="businessTrip">출장신청서</option>
-				    <option value="vacation">휴가신청서</option>  
-				  </select>
-			</div>
-			<div>
-				<label for="department">부서 선택:</label>
-				  <select id="department" name="department">
-				    <option value="design">디자인팀</option>
-				    <option value="hr">인사팀</option>
-				    <option value="development">개발팀</option>
-				  </select>
+	 <!-- Menu and Content Section -->
+    <div class="container-fluid ">
+        <div class="row">
+            <!-- Menu Section -->
+            <div th:replace="layout/menu.html :: div"></div>
+            
+            
+           <!-- Content Section -->
+            <div class="col-md-10 bg-light bg-gradient h-auto">
+				<div>
+				  <div id="top">
+				    기안서 작성
+				  </div>
 				  
-				  <select id="teamLeader" name="teamLeader">
-				    <option value="kimCEO">김사장</option>
-				    <option value="kimTeamLeader">김팀장</option>
-				    <option value="goTeamLeader">고도리</option>
-				  </select>
-			</div>						
-		</div>
-		
-	<div>
-		<div class="header">
-		    <h2>출장신청서</h2>
-		</div>
-		<div class="info">
-		    <p><span class="info-label">부서:</span><br><input class="info-input" type="text" name="department"></p>
-		    <p><span class="info-label">성명:</span><br><input class="info-input" type="text" name="name"></p>
-		    <p><span class="info-label">직위:</span><br><input class="info-input" type="text" name="position"></p>
-		    <p><span class="info-label">종류:</span><br>
-		      <label><input type="radio" name="category" value="연차"> 연차</label>
-		      <label><input type="radio" name="category" value="월차"> 월차</label>
-		      <label><input type="radio" name="category" value="보건"> 보건</label>
-		      <label><input type="radio" name="category" value="특별"> 특별</label>
-		      <label><input type="radio" name="category" value="공가"> 공가</label>
-		    </p>
-		    <p><span class="info-label">사유:</span><br><input class="info-input" type="text" name="reason"></p>
-		    <p><span class="info-label">기간:</span><br>
-		      <input class="info-input" type="date" name="startDate" id="startDate"> ~
-		      <input class="info-input" type="date" name="endDate" id="endDate">
-		      <span id="dateWarning" style="color: red;"></span>
-		    </p>
-		    <p><span class="info-label">비상연락망:</span><br><input class="info-input" type="text" name="emergencyContact"></p>
-		</div>
-  
-  									
-		<div class="footer">
-		    <p>위와 같이 출장을 신청하오니 승인하여 주시기 바랍니다.</p>
-		    <p><span id="date"></span></p>
-		    <p>성명 : <input type="text" name="applicantName"></p>
-		    <p>승인 : <input type="text" name="approval"></p>
-		</div>
-	</div>
+				<!-- 작성 form start. -->
+				
+				  <form>  
+				    <div id="meddle">
+					  <!-- 왼쪽. -->
+				      <div>		 
+						<!-- 일자선택  -->
+				        <div id="dateInputContainer">
+				          <label for="dateInput">일자 </label>
+				          <input type="date" id="dateInput" name="dateInput">
+				        </div>
+				        
+				       <!-- 구분선택. -->
+				        <div id="requestTypeContainer" class="form-field">
+				          <label for="requestType">구분 </label>
+				          <select id="requestType" name="requestType">
+				            <option value="businessTrip">출장신청서</option>
+				          </select>
+				        </div>
+				        
+				        <!-- 부서선택. -->
+				        <div id="departmentContainer" class="form-field">
+				          <label for="department">결제자 </label>
+				          <div id="departmentselect">
+							  <div id="department-one">
+						          <select id="department" name="department">
+						            <option value="design">디자인팀</option>
+						            <option value="hr">인사팀</option>
+						            <option value="development">개발팀</option>
+						          </select>
+						          <select id="teamLeader" name="teamLeader">
+						            <option value="kimCEO">김사장</option>
+						            <option value="kimTeamLeader">김팀장</option>
+						            <option value="goTeamLeader">고도리</option>
+						          </select>
+						       </div>
+						       <div id="department-two">
+						          <select id="department" name="department">
+						            <option value="design">디자인팀</option>
+						            <option value="hr">인사팀</option>
+						            <option value="development">개발팀</option>
+						          </select>
+						          <select id="teamLeader" name="teamLeader">
+						            <option value="kimCEO">김사장</option>
+						            <option value="kimTeamLeader">김팀장</option>
+						            <option value="goTeamLeader">고도리</option>
+						          </select>
+						       </div>
+						       
+				          
+				          </div>
+				        </div>            
+				      </div>
+				      
+				      <!-- 오른쪽. -->
+				      <div id="right">
+						<!-- 출장신청서 작성. -->
+				        <div id="rest">출장신청서</div>
+				           <table>
+							    <tr>
+							      <td><span class="info-label">부서</span></td>
+							      <td><input class="info-input" type="text" name="department"></td>
+							    </tr>
+							    <tr>
+							      <td><span class="info-label">성명</span></td>
+							      <td><input class="info-input" type="text" name="name"></td>
+							    </tr>
+							    <tr>
+							      <td><span class="info-label">직위</span></td>
+							      <td><input class="info-input" type="text" name="position"></td>
+							    </tr>
+							     <tr>
+							      <td><span class="info-label">종류</span></td>
+							      <td>
+							        <label><input type="checkbox" name="category" value="연차"> 연차</label>
+							        <label><input type="checkbox" name="category" value="월차"> 월차</label>
+							        <label><input type="checkbox" name="category" value="보건"> 보건</label>
+							        <label><input type="checkbox" name="category" value="특별"> 특별</label>
+							        <label><input type="checkbox" name="category" value="공가"> 공가</label>
+							      </td>
+							    </tr>
+							    <tr>
+							      <td><span class="info-label">사유</span></td>
+							      <td><input class="info-input" type="text" name="reason"></td>
+							    </tr>
+							    <tr>
+							      <td><span class="info-label">기간</span></td>
+							      <td>
+							        <input class="info-input" type="date" name="startDate" id="startDate"> ~
+							        <input class="info-input" type="date" name="endDate" id="endDate">
+							        <span id="dateWarning"></span>
+							      </td>
+							    </tr>
+							    <tr>
+							      <td><span class="info-label">비상연락망</span></td>
+							      <td><input class="info-input" type="text" name="emergencyContact"></td>
+							    </tr>
+							  </table>
+				          
+				                             
+				          <div id="low-lable">
+				            <p>위와 같이 출장을 신청하오니 승인하여 주시기 바랍니다.</p>
+				            <p><span id="date"></span></p>
+				            <p>성명
+								<input type="text" name="applicantName">
+							</p>
+				            <p>승인
+<!--								<input type="text" name="approval">
+-->							</p>
+				          </div>
+				          
+				      </div>  
+				    </div>
+				    
+				    
+				    <!-- 마무리단계. -->
+				    <div id="under">
+				      <div class="under-one">
+				        <input type="submit" value="제출">
+				      </div>
+				      <div class="under-two">
+				        <input type="submit" value="취소">
+				      </div>
+				    </div>
+				  </form> 
+				</div>
 
-		
-		<div id="under">
-			  <div>
-			    <input type="submit" value="제출">
-			  </div>
-			  <div>
-			    <input type="submit" value="취소">
-			  </div>
-		</div>
-</div>	
+				
+            </div>
+        </div>
+    </div>
 
-
-
-
-
-<script>
-  // 현재 날짜를 가져와서 업데이트
-  const today = new Date();
-  const year = today.getFullYear();
-  const month = String(today.getMonth() + 1).padStart(2, '0');
-  const day = String(today.getDate()).padStart(2, '0');
-  document.getElementById("date").textContent = `${year}년${month}월${day}일`;
-
-  // 종료 날짜가 시작 날짜보다 작을 경우 경고 표시
-  const startDateInput = document.getElementById("startDate");
-  const endDateInput = document.getElementById("endDate");
-  const dateWarning = document.getElementById("dateWarning");
-
-  endDateInput.addEventListener("change", function() {
-    if (new Date(endDateInput.value) < new Date(startDateInput.value)) {
-      dateWarning.textContent = "종료 날짜는 시작 날짜보다 빠를 수 없습니다.";
-    } else {
-      dateWarning.textContent = "";
-    }
-  });
-</script>
-
-
+	<!-- Bootstrap JS and Popper.js Links (Required for Bootstrap) -->
+	<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+	<script
+		src="https://cdn.jsdelivr.net/npm/@popperjs/core@1.16.1/dist/umd/popper.min.js"></script>
+	<script
+		src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </body>
+
 </html>
