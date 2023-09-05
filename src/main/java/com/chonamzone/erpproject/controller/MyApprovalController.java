@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.chonamzone.erpproject.model.MyApprovalDTO;
@@ -32,19 +33,19 @@ public class MyApprovalController {
         model.addAttribute("posts", posts);
         model.addAttribute("currentPage", page);
         model.addAttribute("totalPages", totalPages);
-        
-        List<MyApprovalDTO> mylist = myApprovalService.getPaged(page, perPage, loginid);
-        model.addAttribute("mylist", mylist);
-		
         return "list";
     }
     
-    @GetMapping("/testdoc")
-    public String myApprovalDoc(@RequestParam int dnum, Model model) {
+    @GetMapping("/testdoc/{dSeq}")
+    public String myApprovalDoc(@PathVariable int dSeq, Model model) {
 
-    	MyApprovalDTO Dto = myApprovalService.select(dnum, loginid);
+    	MyApprovalDTO Dto = myApprovalService.select(dSeq, loginid);
     	
     	model.addAttribute("mylist", Dto);
+    	
+    	
+    	int check = myApprovalService.nowApproval(Dto, loginid);
+    	model.addAttribute("check", check);
     	
         return "testdoc";
     }

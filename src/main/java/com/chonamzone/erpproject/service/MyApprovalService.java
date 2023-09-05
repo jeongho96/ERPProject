@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.chonamzone.erpproject.mapper.MyApprovalMapper;
 import com.chonamzone.erpproject.model.MyApprovalDTO;
+import com.chonamzone.erpproject.model.MyApprovalDTO2;
 
 @Service
 
@@ -41,6 +42,21 @@ public class MyApprovalService {
     	MyApprovalDTO dselect = myapprovalmapper.select(dnum, loginId); 
     	return dselect;
     }
-	;
+    
+    public int nowApproval(MyApprovalDTO Dto, int loginId) {
+    	
+    	int check = 1;
+    	int dSeq = Dto.getDSeq();
+    	MyApprovalDTO2 loginDto = myapprovalmapper.selectApprovers(dSeq, loginId);
+  
+    		if(Dto.getDStatus() != "진행중" || Dto.getAApproverId() == loginId ||(
+    				loginDto.getAOder() == 2 && myapprovalmapper.selectOder(dSeq, 1).getAApproverState() != "승인")) {
+    			check = 0;
+    		}
+ 
+    		
+    		
+    	return check;
+    }
 	
 }

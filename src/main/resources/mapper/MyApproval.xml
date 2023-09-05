@@ -96,11 +96,18 @@
 		where d.d_seq = #{dnum}
 	</select>
 
-	<select id="selectApprovers" resultMap="appResultMap"
+	<select id="selectApprovers" resultMap="com.chonamzone.erpproject.model.MyApprovalDTO2"
 		parameterType="int">
 		select *
 		from approvers
-		where d_seq = #{dSeq}
+		where d_seq = #{dSeq} and a_approver_id = #{aApproverId}
+	</select>
+	
+	<select id="selectOder" resultMap="com.chonamzone.erpproject.model.MyApprovalDTO2"
+		parameterType="int">
+		select *
+		from approvers
+		where d_seq = #{dSeq} and a_order_num = #{aOder}
 	</select>
 
 	<update id="updateApproversState" parameterType="String">

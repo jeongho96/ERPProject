@@ -7,9 +7,9 @@ import lombok.Setter;
 @Setter
 public class MyApprovalDTO {
 	private String dCategory; 			
-	private String dSeq;		
-	private String dDrafterId;		
-	private String aApproverId;	
+	private int dSeq;		
+	private int dDrafterId;		
+	private int aApproverId;	
 	private String dDraftingDate;			
 	private String dStatus;
 }

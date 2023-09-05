@@ -9,7 +9,7 @@
 	<h1>Post List</h1>
 	<table>
 		<tbody>
-			<tr th:each="list : ${mylist}">
+			<tr th:each="list : ${posts}">
 				<td th:text="${list.dCategory}"></td>
 				<td th:text="${list.dSeq}"></td>
 				<td th:text="${list.dDrafterId}"></td>
