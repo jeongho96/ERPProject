@@ -4,6 +4,8 @@ import java.time.LocalDate;
 import java.util.List;
 
 import lombok.Data;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 @Data
 public class UserDTO {
@@ -25,4 +27,14 @@ public class UserDTO {
 	private int pId;														// 부서 식별자
 		
 	private List<DocumentListDTO> documemtList;		// 문서 목록 리스트
+	
+	
+	@Getter
+	@NoArgsConstructor
+	public static class MGResponse {
+		private String uName;
+		private String uPosition;
+		private String pName;
+	}
+	
 }
