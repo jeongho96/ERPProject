@@ -9,11 +9,13 @@ import org.springframework.stereotype.Service;
 
 import com.chonamzone.erpproject.mapper.ApproverMapper;
 import com.chonamzone.erpproject.mapper.DocumentListMapper;
+import com.chonamzone.erpproject.mapper.PartnameMapper;
 import com.chonamzone.erpproject.mapper.TravelMapper;
 import com.chonamzone.erpproject.mapper.UserMapper;
 import com.chonamzone.erpproject.mapper.VacationMapper;
 import com.chonamzone.erpproject.model.ApproverDTO;
 import com.chonamzone.erpproject.model.DocumentListDTO;
+import com.chonamzone.erpproject.model.PartnameDTO;
 import com.chonamzone.erpproject.model.TravelDTO;
 import com.chonamzone.erpproject.model.UserDTO;
 import com.chonamzone.erpproject.model.VacationDTO;
@@ -29,6 +31,7 @@ public class ManagementService {
 	private final TravelMapper travelMapper;
 	private final VacationMapper vacationMapper;
 	private final UserMapper userMapper;
+	private final PartnameMapper partnameMapper;
 	
 
 	public List<DocumentListDTO.MGResponse> getManagementList(int page) {
@@ -68,11 +71,13 @@ public class ManagementService {
 		List<ApproverDTO.MGResponse> approverList = approverMapper.getApproverDetailsListByDSeq(dSeq);
 		VacationDTO vacationDTO = vacationMapper.getVacationByDSeq(dSeq);
 		UserDTO.MGResponse userDTO = userMapper.getUserWithPartnameById(documentListDTO.getDDrafterId());
+		List<PartnameDTO.MGResponse> partnameDTO = partnameMapper.getPartnameWithUserNameAll();
 		
 		map.put("documentListDTO", documentListDTO);
 		map.put("approverList", approverList);
 		map.put("vacationDTO", vacationDTO);
-		map.put("userDTO", userDTO); 
+		map.put("userDTO", userDTO);
+		map.put("partnameDTO", partnameDTO);
 		
 		return map;
 		
