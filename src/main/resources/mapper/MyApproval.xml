@@ -96,14 +96,14 @@
 		where d.d_seq = #{dnum}
 	</select>
 
-	<select id="selectApprovers" resultMap="com.chonamzone.erpproject.model.MyApprovalDTO2"
+	<select id="selectApprovers" resultType="com.chonamzone.erpproject.model.MyApprovalDTO2"
 		parameterType="int">
 		select *
 		from approvers
 		where d_seq = #{dSeq} and a_approver_id = #{aApproverId}
 	</select>
 	
-	<select id="selectOder" resultMap="com.chonamzone.erpproject.model.MyApprovalDTO2"
+	<select id="selectOder" resultType="com.chonamzone.erpproject.model.MyApprovalDTO2"
 		parameterType="int">
 		select *
 		from approvers
