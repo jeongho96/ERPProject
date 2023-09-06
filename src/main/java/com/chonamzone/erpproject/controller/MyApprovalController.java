@@ -38,16 +38,19 @@ public class MyApprovalController {
     
     @GetMapping("/testdoc/{dSeq}")
     public String myApprovalDoc(@PathVariable int dSeq, Model model) {
-
+    	
+    	
     	MyApprovalDTO Dto = myApprovalService.select(dSeq, loginid);
     	
     	model.addAttribute("mylist", Dto);
     	
     	
-    	int check = myApprovalService.nowApproval(Dto, loginid);
+    	int check = myApprovalService.nowApproval(dSeq, loginid);
     	model.addAttribute("check", check);
     	
         return "testdoc";
     }
+    
+    
 
 }
