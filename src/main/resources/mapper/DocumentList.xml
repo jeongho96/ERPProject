@@ -58,6 +58,13 @@
 		FROM document_list
 		WHERE d_seq = #{dSeq}
 	</select> 
+	
+	<update id="updateDDraftingDate" parameterType="java.util.Map">
+		UPDATE document_list
+		SET d_drafting_date = #{dDraftingDate}
+		WHERE d_seq = #{dSeq}
+			
+	</update>
 
 	
 </mapper>

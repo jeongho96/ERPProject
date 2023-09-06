@@ -1,5 +1,7 @@
 package com.chonamzone.erpproject.service;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -19,6 +21,7 @@ import com.chonamzone.erpproject.model.PartnameDTO;
 import com.chonamzone.erpproject.model.TravelDTO;
 import com.chonamzone.erpproject.model.UserDTO;
 import com.chonamzone.erpproject.model.VacationDTO;
+import com.chonamzone.erpproject.model.VacationDTO.MGVacationDTO;
 
 import lombok.RequiredArgsConstructor;
 
@@ -64,22 +67,70 @@ public class ManagementService {
 		return travelMapper.getTravelByDSeq(dSeq);
 	}
 	
-	public Map<String, Object> getManagementVacation(int dSeq) {
-		Map<String, Object> map = new HashMap<>();
-		
+	public VacationDTO.MGVacationDTO getManagementVacation(int dSeq) {
 		DocumentListDTO.MapperData documentListDTO = documentListMapper.getDocumentListByDSeq(dSeq);
-		List<ApproverDTO.MGResponse> approverList = approverMapper.getApproverDetailsListByDSeq(dSeq);
+		List<ApproverDTO.MGResponse> approversDTO = approverMapper.getApproverDetailsListByDSeq(dSeq);
 		VacationDTO vacationDTO = vacationMapper.getVacationByDSeq(dSeq);
 		UserDTO.MGResponse userDTO = userMapper.getUserWithPartnameById(documentListDTO.getDDrafterId());
-		List<PartnameDTO.MGResponse> partnameDTO = partnameMapper.getPartnameWithUserNameAll();
 		
-		map.put("documentListDTO", documentListDTO);
-		map.put("approverList", approverList);
-		map.put("vacationDTO", vacationDTO);
-		map.put("userDTO", userDTO);
-		map.put("partnameDTO", partnameDTO);
+		VacationDTO.MGVacationDTO vacation = new VacationDTO.MGVacationDTO();
+		vacation.setDSeq(documentListDTO.getDSeq());
+		vacation.setDDraftingDate(documentListDTO.getDDraftingDate().toString());
+		vacation.setAprvPa1(approversDTO.get(0).getPName());
+		vacation.setAprvName1(approversDTO.get(0).getUName());
+		vacation.setAprvPa2(approversDTO.get(1).getPName());
+		vacation.setAprvName2(approversDTO.get(1).getUName());
+		vacation.setPName(userDTO.getPName());
+		vacation.setUName(userDTO.getUName());
+		vacation.setUPosition(userDTO.getUPosition());
+		vacation.setVLeaveType(vacationDTO.getVLeaveType());
+		vacation.setVReason(vacationDTO.getVReason());
+		vacation.setVStartDate(vacationDTO.getVStartDate().toString());
+		vacation.setVEndDate(vacationDTO.getVEndDate().toString());
+		vacation.setVEmployeeContact(vacationDTO.getVEmployeeContact());
 		
-		return map;
+		return vacation;
+		
+	}
+	
+	
+	public List<PartnameDTO.MGResponse> getPartnameWithUsernameAll(){
+		return partnameMapper.getPartnameWithUserNameAll();
+	}
+
+
+	public void updateVacations(MGVacationDTO vacation) {
+		Map<String, Object> documentMap = new HashMap<>();
+		documentMap.put("dSeq", vacation.getDSeq());
+		documentMap.put("dDraftingDate", vacation.getDDraftingDate());
+		
+		documentListMapper.updateDDraftingDate(documentMap);
+		
+		Map<String, Object> aprvMap1 = new HashMap<>();
+		aprvMap1.put("dSeq", vacation.getDSeq());
+		aprvMap1.put("aOrderNum", 1);
+		aprvMap1.put("pName", vacation.getAprvPa1());
+		aprvMap1.put("uName", vacation.getAprvName1());
+		
+		approverMapper.updateApproverId(aprvMap1);
+		
+		Map<String, Object> aprvMap2 = new HashMap<>();
+		aprvMap2.put("dSeq", vacation.getDSeq());
+		aprvMap2.put("aOrderNum", 2);
+		aprvMap2.put("pName", vacation.getAprvPa2());
+		aprvMap2.put("uName", vacation.getAprvName2());
+		
+		approverMapper.updateApproverId(aprvMap2);
+		
+		Map<String, Object> vacationMap = new HashMap<>();
+		vacationMap.put("dSeq", vacation.getDSeq());
+		vacationMap.put("vLeaveType", vacation.getVLeaveType());
+		vacationMap.put("vReason", vacation.getVReason());
+		vacationMap.put("vStartDate", vacation.getVStartDate());
+		vacationMap.put("vEndDate", vacation.getVEndDate());
+		vacationMap.put("vEmployeeContact", vacation.getVEmployeeContact());
+		
+		vacationMapper.update(vacationMap);
 		
 	}
 
