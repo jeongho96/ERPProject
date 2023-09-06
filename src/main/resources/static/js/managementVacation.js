@@ -1,3 +1,5 @@
+var partnameList;
+
 document.addEventListener("DOMContentLoaded", function(){
 	
 	var dSeq = location.pathname;
@@ -34,22 +36,9 @@ document.addEventListener("DOMContentLoaded", function(){
 				break;
 		}
 		
-		
-		
-		var aprvPa1 = document.getElementById("aprvPa1");
-		
-		aprvPa1.selectedIndex = 1;
-		
-		var optionValue = data.userDTO.pname;
-		
-		alert(optionValue);
-		for (var i = 0; i < aprvPa1.options.length; i++) {
-		    if (aprvPa1.options[i].value == optionValue) {
-		        aprvPa1.selectedIndex = i;
-		        break;
-		    }
-		}
-
+		partnameList = data.partnameDTO;
+		selectChange("개발팀", "aprvName1");
+		selectChange("개발팀", "aprvName2");
 		
 		
 		/*
@@ -121,4 +110,80 @@ document.addEventListener("DOMContentLoaded", function(){
 		*/
 		
 	})
+	
+	
 });
+
+
+function selectChange(aprvPa, aprvName){
+	var optionContents = "";
+	var aprvName = document.getElementById(aprvName);
+	
+	for(var i = 0; i < partnameList.length; i++){
+		if (aprvPa == partnameList[i].pname){
+			for(var j = 0; j < partnameList[i].unameList.length; j++){
+				optionContents += "<option>" + partnameList[i].unameList[j] + "</option>";	
+			}
+		}
+	}
+	
+	aprvName.innerHTML = optionContents;
+	
+}
+
+
+/*function createPartname(aprvPa, aprvName1, partnameDTO){
+	var partnameContents = "";
+	var userContents = "";
+	
+	for(var i = 0; i < partnameDTO.length; i++){
+		partnameContents += "<option>" + partnameDTO[i].pname + "</option>";
+	}
+	
+	aprvPa.innerHTML= partnameContents;
+	
+	"partnameDTO": [
+	    {
+	      "unameList": [
+	        "김인턴",
+	        "김팀장",
+	        "김사장"
+	      ],
+	      "pname": "개발팀",
+	      "pid": 1
+	    },
+	    {
+	      "unameList": [
+	        "김사원"
+	      ],
+	      "pname": "영업팀",
+	      "pid": 2
+	    },
+	    {
+	      "unameList": [
+	        "김주임"
+	      ],
+	      "pname": "인사팀",
+	      "pid": 3
+	    }
+	  ],
+}
+
+function selectedApprovers(){
+	var aprvPa1 = document.getElementById("aprvPa1");
+	var aprvName1 = document.getElementById("aprvName1");
+	var optionContents = "";
+	
+	aprvPa1.selectedIndex = 1;
+	
+	var optionValue = data.userDTO.pname;
+		
+	for (var i = 0; i < aprvPa1.options.length; i++) {
+	    if (aprvPa1.options[i].value == optionValue) {
+	        aprvPa1.selectedIndex = i;
+	        optionContents += "<option selected>" + data.approverList[i].uname + "</option>";
+	        aprvName1.innerHTML(optionContents);
+	        break;
+	    }
+	}
+}*/
