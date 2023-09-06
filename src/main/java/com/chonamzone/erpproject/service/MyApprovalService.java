@@ -43,20 +43,36 @@ public class MyApprovalService {
     	return dselect;
     }
     
-    public int nowApproval(MyApprovalDTO Dto, int loginId) {
+    public int nowApproval(int dSeq, int loginId) {
     	
-    	int check = 1;
-    	int dSeq = Dto.getDSeq();
+    	int check = 1; //1은 결재/반려 표시, 0은 표시안함, 2는 결재취소 표시
+    	MyApprovalDTO Dto = myapprovalmapper.select(dSeq, loginId);
+    	
     	MyApprovalDTO2 loginDto = myapprovalmapper.selectApprovers(dSeq, loginId);
-  
+    	
     		if(Dto.getDStatus() != "진행중" || Dto.getAApproverId() == loginId ||(
-    				loginDto.getAOder() == 2 && myapprovalmapper.selectOder(dSeq, 1).getAApproverState() != "승인")) {
+    				loginDto.getAOder() == 2 && myapprovalmapper.selectOrder(dSeq, 1).getAApproverState() != "승인")) {
     			check = 0;
+    		}else if(Dto.getDStatus() == "진행중" && Dto.getAApproverId() == loginId
+    				&& myapprovalmapper.selectOrder(dSeq, 1).getAApproverState() == "진행중"){
     		}
- 
-    		
-    		
+
     	return check;
     }
-	
+    
+    public void approvalState(String state, MyApprovalDTO2 Dto) {
+    	//state는 어떤 버튼을 눌렀는가
+    	int id = Dto.getAApproverId();
+    	int dSeq = Dto.getDSeq();
+    if(state == "반려") {
+    	myapprovalmapper.updateApproversState(dSeq, id, "반려");
+    	myapprovalmapper.updateDocStatus(dSeq, "반려");
+    }else if(Dto.getAOder() == 2) {
+    	myapprovalmapper.updateApproversState(dSeq, id, "승인");
+    	myapprovalmapper.updateDocStatus(dSeq, "최종승인");
+    }else {
+    	myapprovalmapper.updateApproversState(dSeq, id, "승인");
+    }
+    	
+    }
 }

@@ -74,14 +74,14 @@
 		d.d_seq
 		=
 		a.d_seq
-		where d.d_seq = #{dnum} and a.a_approver_id = #{id}
+		where d.d_seq = #{dSeq} and a.a_approver_id = #{id}
 	</select>
 
 	<select id="selectDocumentListVacation" resultMap="appResultMap"
 		parameterType="int">
 		select *
 		from document_list d
-		join vaction v ON
+		join vactions v ON
 		d.d_seq = v.d_seq
 		where d.d_seq = #{dnum}
 	</select>
@@ -103,7 +103,11 @@
 		where d_seq = #{dSeq} and a_approver_id = #{aApproverId}
 	</select>
 	
+<<<<<<< HEAD
 	<select id="selectOder" resultType="com.chonamzone.erpproject.model.MyApprovalDTO2"
+=======
+	<select id="selectOrder" resultMap="com.chonamzone.erpproject.model.MyApprovalDTO2"
+>>>>>>> nh
 		parameterType="int">
 		select *
 		from approvers
