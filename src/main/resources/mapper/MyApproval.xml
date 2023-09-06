@@ -103,11 +103,7 @@
 		where d_seq = #{dSeq} and a_approver_id = #{aApproverId}
 	</select>
 	
-<<<<<<< HEAD
 	<select id="selectOder" resultType="com.chonamzone.erpproject.model.MyApprovalDTO2"
-=======
-	<select id="selectOrder" resultMap="com.chonamzone.erpproject.model.MyApprovalDTO2"
->>>>>>> nh
 		parameterType="int">
 		select *
 		from approvers
