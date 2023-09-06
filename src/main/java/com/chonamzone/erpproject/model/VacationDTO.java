@@ -2,6 +2,7 @@ package com.chonamzone.erpproject.model;
 
 import java.time.LocalDate;
 
+import lombok.Builder;
 //DTO는 모델 선언을 하는 곳이다.
 //이곳은 휴가신청서 모델 테이블이다.
 //컬럼명에 노란줄은 아직 사용전이라 뜨는 것이다.
@@ -26,5 +27,31 @@ public class VacationDTO {
 	private LocalDate vEndDate;
 	
 	private String vEmployeeContact;
+	
+	
+	@Getter
+	@Setter
+	@NoArgsConstructor
+	public static class MGVacationDTO {
+		private int dSeq;
+		private String dDraftingDate;
+		private String aprvPa1;
+		private String aprvName1;
+		private String aprvPa2;
+		private String aprvName2;
+		private String pName;
+		private String uName;
+		private String uPosition;
+		private String vLeaveType;
+		private String vReason;
+		private String vStartDate;
+		private String vEndDate;
+		private String vEmployeeContact;
+		
+	
+		
+	}
+	
+	
 
 }
