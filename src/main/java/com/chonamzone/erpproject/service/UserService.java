@@ -30,12 +30,12 @@ public class UserService implements UserDetailsService{
         return user;
     }
 	
-	public UserDTO getUserById(int id) {
-        return userMapper.getUserById(id);
+	public UserDTO getUserById(String id) {
+		int uId = Integer.parseInt(id);
+        return userMapper.getUserById(uId);
     }
 	
 	public void updatePwd(int id, String uPwd) {
-		
 		userMapper.updatePwd(id, uPwd);
 	}
 

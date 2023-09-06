@@ -27,7 +27,7 @@ public class CustomUserDetails implements UserDetails {
 
     @Override
     public String getUsername() {
-        return userDTO.getUName();
+    	return Integer.toString(userDTO.getUId());
     }
 
     // 아래의 메서드들을 구현해야 합니다. 예를 들어, 계정이 만료되었는지, 잠겼는지 등을 확인할 수 있습니다.
