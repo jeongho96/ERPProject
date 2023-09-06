@@ -38,6 +38,27 @@
 				 
 				 <div>
 					 <table id="contents" style="border: 1px solid #444444;">
+						 <tr>
+							<th>기안일자</th>
+							<th>구분</th>
+							<th>기안자</th>
+							<th>결재자</th>
+							<th>결재순서</th>
+							<th>진행상태</th>
+							<th>보기</th>
+						</tr>
+						<tr th:each="management : ${managementAllList}">
+							<td th:text="${management.dDraftingDate}"></td>
+							<td th:text="${management.dCategory}"></td>
+							<td th:text="${management.dDrafterName}"></td>
+							<td th:text="${management.aApproverName}"></td>
+							<td th:text="${management.aOrderNum}"></td>
+							<td th:text="${management.aApproverState}"></td>								
+							<td>
+							    <a th:if="${management.dCategory == '휴가신청서'}" th:href="|/management/vacations/${management.dSeq}|">보기</a>
+							    <a th:if="${management.dCategory == '출장보고서'}" th:href="|/management/travels/${management.dSeq}|">보기</a>
+							</td>
+						</tr>
 					 </table>
 				 </div>
             </div>
