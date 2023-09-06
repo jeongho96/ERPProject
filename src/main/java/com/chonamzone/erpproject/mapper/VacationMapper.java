@@ -6,5 +6,5 @@ import com.chonamzone.erpproject.model.VacationDTO;
 
 @Mapper
 public interface VacationMapper {
-	public VacationDTO getVacationByDSeq(int dSeq);
+	VacationDTO getVacationByDSeq(int dSeq);
 }

@@ -6,5 +6,5 @@ import com.chonamzone.erpproject.model.TravelDTO;
 
 @Mapper
 public interface TravelMapper {
-	public TravelDTO getTravelByDSeq(int dSeq);
+	TravelDTO getTravelByDSeq(int dSeq);
 }

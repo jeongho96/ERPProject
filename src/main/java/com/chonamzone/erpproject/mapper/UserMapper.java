@@ -6,11 +6,11 @@ import com.chonamzone.erpproject.model.UserDTO;
 
 @Mapper
 public interface UserMapper {
-	public String getNameById(int id);
+	String getNameById(int id);
 	
 	// 로그인
-	public UserDTO getUserById(int uId);
-	public void updatePwd(int uId, String uPwd);
+	UserDTO getUserById(int uId);
+	void updatePwd(int uId, String uPwd);
 	
-	public UserDTO.MGResponse getUserWithPartnameById(int uId);
+	UserDTO.MGResponse getUserWithPartnameById(int uId);
 }

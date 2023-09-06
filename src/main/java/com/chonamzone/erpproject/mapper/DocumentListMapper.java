@@ -9,6 +9,6 @@ import com.chonamzone.erpproject.model.DocumentListDTO;
 
 @Mapper
 public interface DocumentListMapper {
-	public List<DocumentListDTO.MapperData> getManagementList(Map<String, Integer> pagination);
-	public DocumentListDTO.MapperData getDocumentListByDSeq(int dSeq);
+	List<DocumentListDTO.MapperData> getManagementList(Map<String, Integer> pagination);
+	DocumentListDTO.MapperData getDocumentListByDSeq(int dSeq);
 }
