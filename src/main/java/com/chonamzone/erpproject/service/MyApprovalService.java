@@ -28,7 +28,9 @@ public class MyApprovalService {
         int end = start + perPage;
         List<MyApprovalDTO> MADto = myapprovalmapper.selectPaged(start, end, loginid);
         return MADto;
-    }
+        }
+ 
+    
     
     public int getTotalPages(int perPage, int loginId) {
         int totalPosts = myapprovalmapper.getTotalPosts(loginId); // Implement this method in the mapper
