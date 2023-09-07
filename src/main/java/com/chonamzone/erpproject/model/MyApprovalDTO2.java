@@ -7,7 +7,7 @@ import lombok.Setter;
 @Setter
 public class MyApprovalDTO2 {
 	private int aSeq; 			
-	private int aOder;		
+	private int aOrderNum;		
 	private int aApproverId;		
 	private String aApproverState;	
 	private int dSeq;			

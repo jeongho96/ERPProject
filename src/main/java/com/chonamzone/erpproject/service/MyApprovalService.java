@@ -2,23 +2,22 @@ package com.chonamzone.erpproject.service;
 
 import java.util.List;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.chonamzone.erpproject.mapper.MyApprovalMapper;
 import com.chonamzone.erpproject.model.MyApprovalDTO;
 import com.chonamzone.erpproject.model.MyApprovalDTO2;
+import com.chonamzone.erpproject.model.MyApprovalDTO3;
+
+import lombok.RequiredArgsConstructor;
 
 @Service
-
+@RequiredArgsConstructor
 public class MyApprovalService {
 	
 	private final MyApprovalMapper myapprovalmapper;
 
-	@Autowired
-	public MyApprovalService(MyApprovalMapper myapprovalmapper) {
-		this.myapprovalmapper = myapprovalmapper;
-	}
+
 	
     public List<MyApprovalDTO> getAll() {
         return myapprovalmapper.selectByIdAll();
@@ -38,41 +37,68 @@ public class MyApprovalService {
         return totalPages;
     }
     
-    public MyApprovalDTO select(int dnum, int loginId) {
-    	MyApprovalDTO dselect = myapprovalmapper.select(dnum, loginId); 
-    	return dselect;
+    public MyApprovalDTO selectByApprover(int dSeq, int loginId) {
+    	MyApprovalDTO selectByApprover = myapprovalmapper.selectByApprover(dSeq, loginId); 
+    	return selectByApprover;
     }
     
-    public int nowApproval(int dSeq, int loginId) {
-    	
-    	int check = 1; //1은 결재/반려 표시, 0은 표시안함, 2는 결재취소 표시
-    	MyApprovalDTO Dto = myapprovalmapper.select(dSeq, loginId);
-    	
+    
+    public int nowApproval(int dSeq, int loginId, int drafterId) {
+    	//결재자인지 확인한 후 이 매서드 사용하고 있음
+    	int check = 0; //1은 결재/반려 표시, 0은 표시안함, 2는 결재취소
+    	//문서정보
+    	MyApprovalDTO Dto = myapprovalmapper.selectByApprover(dSeq, loginId);
+    	//내 approval 정보(로그인한 사람)
     	MyApprovalDTO2 loginDto = myapprovalmapper.selectApprovers(dSeq, loginId);
     	
-    		if(Dto.getDStatus() != "진행중" || Dto.getAApproverId() == loginId ||(
-    				loginDto.getAOder() == 2 && myapprovalmapper.selectOrder(dSeq, 1).getAApproverState() != "승인")) {
-    			check = 0;
-    		}else if(Dto.getDStatus() == "진행중" && Dto.getAApproverId() == loginId
-    				&& myapprovalmapper.selectOrder(dSeq, 1).getAApproverState() == "진행중"){
-    		}
+    	//순수 문서정보만
+    	MyApprovalDTO3 DrafterDto = myapprovalmapper.selectByDSeq(dSeq);
+	
+    	
+		if(DrafterDto.getDDrafterId() != loginId) {//결재자라면
 
+    		if(Dto.getDStatus().equals
+    			("진행중") && (((loginDto.getAOrderNum() == 1)&&(myapprovalmapper.selectOrder(dSeq, 1).getAApproverState().equals("대기")))||
+    				(loginDto.getAOrderNum() == 2 && myapprovalmapper.selectOrder(dSeq, 1).getAApproverState().equals("승인")))) {
+    			check = 1;
+    			}
+    		
+		}else if(myapprovalmapper.selectOrder(dSeq, 1).getAApproverState().equals("대기")) {
+				check = 2;
+			}else {
+				check = 1;
+			}
+		
     	return check;
     }
     
-    public void approvalState(String state, MyApprovalDTO2 Dto) {
-    	//state는 어떤 버튼을 눌렀는가
-    	int id = Dto.getAApproverId();
-    	int dSeq = Dto.getDSeq();
-    if(state == "반려") {
-    	myapprovalmapper.updateApproversState(dSeq, id, "반려");
+    public MyApprovalDTO3 selectByDSeq(int dSeq) {
+    	return myapprovalmapper.selectByDSeq(dSeq);
+    }
+    
+    //public void approvalState(String state, MyApprovalDTO2 Dto) {
+    public void approvalState(String state, int dSeq, int loginId) {
+    	//state는 결재/반려 중 어떤 버튼을 눌렀는지
+    	
+    	
+    	
+    	MyApprovalDTO2 Dto = myapprovalmapper.selectApprovers(dSeq, loginId);
+ 
+    	
+    //if(state.equals("결재취소")) {    }else
+    if(state.equals("반려")) {
+    	myapprovalmapper.updateApproversState(dSeq, loginId, "반려");
     	myapprovalmapper.updateDocStatus(dSeq, "반려");
-    }else if(Dto.getAOder() == 2) {
-    	myapprovalmapper.updateApproversState(dSeq, id, "승인");
+    }else if(Dto.getAOrderNum() == 2) {
+    	myapprovalmapper.updateApproversState(dSeq, loginId, "승인");
     	myapprovalmapper.updateDocStatus(dSeq, "최종승인");
     }else {
-    	myapprovalmapper.updateApproversState(dSeq, id, "승인");
+    	myapprovalmapper.updateApproversState(dSeq, loginId, "승인");
     }
     	
+    }
+    
+    public List<MyApprovalDTO2> selectByApprovers(int dSeq){
+    	return myapprovalmapper.selectApproverByDSeq(dSeq);
     }
 }

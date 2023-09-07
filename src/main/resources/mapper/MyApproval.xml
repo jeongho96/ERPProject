@@ -65,16 +65,41 @@
 		)
 	</select>
 
-	<select id="select" resultMap="appResultMap" parameterType="map">
+	<select id="selectByApprover" resultMap="appResultMap"
+		parameterType="map">
 
 		SELECT
 		d.* , a.a_approver_id
 		FROM document_list d
-		JOIN approvers a ON
+		JOIN
+		approvers a ON
 		d.d_seq
 		=
 		a.d_seq
-		where d.d_seq = #{dSeq} and a.a_approver_id = #{id}
+		where d.d_seq = #{dSeq} and
+		a.a_approver_id = #{id}
+	</select>
+
+	<select id="selectApproverByDSeq" resultMap="appResultMap"
+		parameterType="map">
+
+		SELECT
+		d.* , a.a_approver_id
+		FROM document_list d
+		JOIN
+		approvers a ON
+		d.d_seq
+		=
+		a.d_seq
+		where d.d_seq = #{dSeq}
+	</select>
+	
+	<select id="selectByDSeq" resultType="com.chonamzone.erpproject.model.MyApprovalDTO3"
+		parameterType="int">
+		SELECT
+		*
+		FROM document_list
+		where d_seq = #{dSeq}
 	</select>
 
 	<select id="selectDocumentListVacation" resultMap="appResultMap"
@@ -82,36 +107,43 @@
 		select *
 		from document_list d
 		join vactions v ON
-		d.d_seq = v.d_seq
+		d.d_seq =
+		v.d_seq
 		where d.d_seq = #{dnum}
 	</select>
 
 
-	<select id="selectDocumentListTravel" resultMap="appResultMap" 
-	parameterType="int">
+	<select id="selectDocumentListTravel" resultMap="appResultMap"
+		parameterType="int">
 		select *
 		from document_list d
 		join travels t ON
-		d.d_seq = t.d_seq
+		d.d_seq =
+		t.d_seq
 		where d.d_seq = #{dnum}
 	</select>
 
-	<select id="selectApprovers" resultType="com.chonamzone.erpproject.model.MyApprovalDTO2"
+	<select id="selectApprovers"
+		resultType="com.chonamzone.erpproject.model.MyApprovalDTO2"
 		parameterType="int">
 		select *
 		from approvers
-		where d_seq = #{dSeq} and a_approver_id = #{aApproverId}
-	</select>
-	
-	<select id="selectOder" resultType="com.chonamzone.erpproject.model.MyApprovalDTO2"
-		parameterType="int">
-		select *
-		from approvers
-		where d_seq = #{dSeq} and a_order_num = #{aOder}
+		where d_seq = #{dSeq} and
+		a_approver_id = #{loginId}
 	</select>
 
-	<update id="updateApproversState" parameterType="String">
+	<select id="selectOrder"
+		resultType="com.chonamzone.erpproject.model.MyApprovalDTO2"
+		parameterType="int">
+		select *
+		from approvers
+		where d_seq = #{dSeq} and
+		a_order_num = #{aOder}
+	</select>
+
+	<update id="updateApproversState" parameterType="map">
 		update approvers
+		set
 		a_approver_state = #{state}
 		where a_approver_id = #{id}
 		and d_seq = #{dSeq}
@@ -120,11 +152,18 @@
 
 	<update id="updateDocStatus" parameterType="String">
 		update document_list
+		set
 		d_status = #{dStatus}
 		where d_seq = #{dSeq}
 	</update>
 
-
+	<select id="selectUserInfo" resultType="String" parameterType="int">
+		select u.u_name, u.u_position, p.p_name
+		from users u
+		join partnames p ON
+		u.p_id = p.p_id
+		where u.u_id = #{id}
+	</select>
 
 
 
