@@ -33,4 +33,29 @@ public class TravelDTO {
 	private String tStartDate;
 	
 	private String tEndDate;
+	
+	@Getter
+	@Setter
+	@NoArgsConstructor
+	public static class MGVacationDTO {
+		private int dSeq;
+		private String dDraftingDate;
+		private String aprvPa1;
+		private String aprvName1;
+		private String aprvPa2;
+		private String aprvName2;
+		private String pName;
+		private String uName;
+		private String uPosition;
+		private String tLocation;
+		private String tReason;
+		private String tAccommodation;
+		private int tTransCost;
+		private int tFoodCost;
+		private int tAccommodationCost;
+		private int tEtcCost;
+		private String tStartDate;
+		private String tEndDate;
+		
+	}
 }

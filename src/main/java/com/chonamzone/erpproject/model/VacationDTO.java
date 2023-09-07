@@ -48,8 +48,6 @@ public class VacationDTO {
 		private String vEndDate;
 		private String vEmployeeContact;
 		
-	
-		
 	}
 	
 	
