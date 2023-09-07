@@ -22,7 +22,7 @@
 	        <div class="col-md-10 bg-light bg-gradient h-auto">
 	            <div id="top">출장보고서 수정</div>
 	
-	            <form th:action="@{/management/travel/{dSeq}(dSeq = ${travel.dSeq})}" th:object="${travel}" method="post">
+	            <form th:action="@{/management/travels/{dSeq}(dSeq = ${travel.dSeq})}" th:object="${travel}" method="post">
 					<input type="hidden" name="_method" value="PUT">
 	                <div id="meddle">
 	                    <!-- 왼쪽. -->
