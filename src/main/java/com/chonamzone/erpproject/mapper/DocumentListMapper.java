@@ -10,7 +10,9 @@ import com.chonamzone.erpproject.model.VacationDTO.MGVacationDTO;
 
 @Mapper
 public interface DocumentListMapper {
-	List<DocumentListDTO.MapperData> getManagementList(Map<String, Integer> pagination);
+	List<DocumentListDTO.MapperData> getManagementAllList(Map<String, Integer> pagination);
+	List<DocumentListDTO.MapperData> getManagementList(Map<String, Object> map);
 	DocumentListDTO.MapperData getDocumentListByDSeq(int dSeq);
 	void updateDDraftingDate(Map<String, Object> documentMap);
+	int getTotalCount();
 }
