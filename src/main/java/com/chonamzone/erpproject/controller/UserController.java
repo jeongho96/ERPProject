@@ -1,12 +1,17 @@
 package com.chonamzone.erpproject.controller;
 
 
+import java.util.List;
+
 import javax.servlet.http.HttpSession;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+
+import com.chonamzone.erpproject.model.PartnameDTO;
 import com.chonamzone.erpproject.model.UserDTO;
 import com.chonamzone.erpproject.service.UserService;
 
@@ -35,6 +40,24 @@ public class UserController {
 		session.setAttribute("loginUser", userService.getUserById((String)session.getAttribute("loginUserId")));
 		return "/index";
 	}
+	
+	@GetMapping("/register")
+    public String showRegistrationForm(Model model) {
+		List<PartnameDTO> partNames = userService.getAllPartNames();
+		model.addAttribute("partList", partNames);
+
+        return "registerForm";
+    }
+
+    @PostMapping("/register")
+    public String processRegistration(@ModelAttribute("user") UserDTO user) {
+    	
+    	String defaultPwd = user.getUHireDate().replaceAll("-", "");
+    	user.setUPwd(userService.passwordEncoder().encode(defaultPwd));
+
+        userService.registerUser(user);
+        return "registerSuccess";
+    }
 	
 	
 	@GetMapping("/mypage")
