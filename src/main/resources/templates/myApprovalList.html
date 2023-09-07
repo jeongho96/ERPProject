@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+	<title>Post List</title>
+</head>
+
+<body>
+	<h1>Post List</h1>
+	<table>
+		<tbody>
+			<tr th:each="list : ${posts}">
+				<td th:text="${list.dCategory}"></td>
+				<td th:text="${list.dSeq}"></td>
+				<td th:text="${list.dDrafterId}"></td>
+				<td th:text="${list.aApproverId}"></td>
+				<td th:text="${list.dDraftingDate}"></td>
+				<td th:text="${list.dStatus}"></td>
+				<td>
+					<a th:if="${list.dCategory == '출장보고서'}" th:href="@{/testdoc/{dSeq}(dSeq=${list.dSeq})}">출장보고서</a>
+					<a th:if="${list.dCategory == '휴가신청서'}" th:href="@{/testdoc/{dSeq}(dSeq=${list.dSeq})}">휴가신청서</a>
+				</td>
+			</tr>
+		</tbody>
+	</table>
+
+	<ul class="pagination">
+		<li th:if="${currentPage > 1}">
+			<a th:href="@{/list(page=1)}">첫 페이지</a>
+		</li>
+		<li th:if="${currentPage > 1}">
+			<a th:href="@{/list(page=${currentPage - 1})}">이전</a>
+		</li>
+		<li th:each="pageNo : ${#numbers.sequence(1, totalPages)}" th:if="${pageNo <= totalPages}">
+			<a th:href="@{/list(page=${pageNo})}" th:class="${pageNo == currentPage}">
+				<span th:text="${pageNo}"></span>
+			</a>
+		</li>
+		<li th:if="${currentPage < 10}">
+			<a th:href="@{/list(page=${currentPage + 1})}">다음</a>
+		</li>
+	</ul>
+
+</body>
+
+</html>
