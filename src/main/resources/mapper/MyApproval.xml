@@ -36,7 +36,7 @@
 
 	<select id="selectPaged" resultMap="appResultMap"
 		parameterType="map">
-		SELECT * FROM (
+SELECT * FROM (
 		SELECT ROWNUM AS rnum, doc.*
 		FROM (
 		SELECT
@@ -46,10 +46,9 @@
 		=
 		a.d_seq
 		) doc
+		WHERE (a_approver_id = #{id} or d_drafter_id = #{id})
 		)
 		WHERE (rnum &gt;= #{start} AND rnum &lt;= #{end})
-		and
-		(a_approver_id = #{id} or d_drafter_id = #{id})
 	</select>
 
 	<select id="getTotalPosts" resultType="int">
@@ -150,7 +149,7 @@
 	</update>
 
 
-	<update id="updateDocStatus" parameterType="String">
+	<update id="updateDocStatus" parameterType="map">
 		update document_list
 		set
 		d_status = #{dStatus}
