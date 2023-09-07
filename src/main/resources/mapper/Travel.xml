@@ -9,4 +9,15 @@
 		WHERE d_seq = #{dSeq}
 	</select>
 	
+	<update id="update" parameterType="com.chonamzone.erpproject.model.TravelDTO$MGVacationDTO">
+		UPDATE travels
+		SET t_trans_cost = #{tTransCost},
+			t_food_cost = #{tFoodCost},
+			t_accommodation_cost = #{tAccommodationCost},
+			t_etc_cost = #{tEtcCost},
+			t_start_date = #{tStartDate},
+			t_end_date = #{tEndDate}
+		WHERE d_seq = #{dSeq}
+	</update>
+	
 </mapper>

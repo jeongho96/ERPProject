@@ -9,7 +9,7 @@
 		WHERE d_seq = #{dSeq}
 	</select>
 	
-	<update id="update" parameterType="java.util.Map">
+	<update id="update" parameterType="com.chonamzone.erpproject.model.VacationDTO$MGVacationDTO">
 		UPDATE vacations
 		SET v_leave_type = #{vLeaveType},
 			v_reason = #{vReason},

@@ -85,14 +85,12 @@
 		UPDATE document_list
 		SET d_drafting_date = #{dDraftingDate}
 		WHERE d_seq = #{dSeq}
-	</update>
+	</update> 
 
 	<select id="getTotalCount" resultType="int">
 		SELECT COUNT(*)
 		FROM  document_list
 	</select>
-	
-	
 	
 	
 </mapper>
