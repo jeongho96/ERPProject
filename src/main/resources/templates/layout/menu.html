@@ -13,7 +13,19 @@
 	<div class="col-md-2 bg-secondary bg-gradient">
 		<!-- Menu content -->
 		<ul class="nav flex-column text-white">
-			<div class="list-group">
+			<div th:if = "${session.loginUser.getPId != 3}" class="list-group">
+				<a href="#"
+					class="list-group-item list-group-item-action list-group-item-secondary mb-4 rounded">
+					내 결재 관리</a> 
+					<a href="/document"
+					class="list-group-item list-group-item-action list-group-item-secondary mb-4 rounded">
+					기안서 작성</a> 
+					<a href="/mypage"
+					class="list-group-item list-group-item-action list-group-item-secondary mb-4 rounded">
+					내 정보 관리</a>
+
+			</div>
+			<div th:if = "${session.loginUser.getPId == 3}" class="list-group">
 				<a href="#"
 					class="list-group-item list-group-item-action list-group-item-secondary mb-4 rounded">
 					내 결재 관리</a> 
