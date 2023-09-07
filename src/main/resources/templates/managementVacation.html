@@ -22,7 +22,7 @@
 	        <div class="col-md-10 bg-light bg-gradient h-auto">
 	            <div id="top">휴가신청서 수정</div>
 	
-	            <form th:action="@{/testdoc/{dSeq}(dSeq = ${vacation.dSeq})}" th:object="${vacation}" method="post">
+	            <form th:action="@{/management/vacations/{dSeq}(dSeq = ${vacation.dSeq})}" th:object="${vacation}" method="post">
 					<input type="hidden" name="_method" value="PUT">
 	                <div id="meddle">
 	                    <!-- 왼쪽. -->
@@ -89,11 +89,11 @@
 	                             <tr>
 					               	<td><span class="info-label">종류</span></td>
 					               	<td>
-				                 		<label><input type="checkbox" name="leaveType" value="연차" th:field="*{vLeaveType}" checked> 연차</label>
-					                 	<label><input type="checkbox" name="leaveType" value="월차" th:field="*{vLeaveType}"> 월차</label>
-					                 	<label><input type="checkbox" name="leaveType" value="보건" th:field="*{vLeaveType}"> 보건</label>
-					                 	<label><input type="checkbox" name="leaveType" value="특별" th:field="*{vLeaveType}"> 특별</label>
-					                 	<label><input type="checkbox" name="leaveType" value="공가" th:field="*{vLeaveType}"> 공가</label>
+										   <label><input type="radio" name="vLeaveType" value="연차" th:field="*{vLeaveType}"> 연차</label>
+										   <label><input type="radio" name="vLeaveType" value="월차" th:field="*{vLeaveType}"> 월차</label>
+										   <label><input type="radio" name="vLeaveType" value="보건" th:field="*{vLeaveType}"> 보건</label>
+										   <label><input type="radio" name="vLeaveType" value="특별" th:field="*{vLeaveType}"> 특별</label>
+										   <label><input type="radio" name="vLeaveType" value="공가" th:field="*{vLeaveType}"> 공가</label>
 					               	</td>
 				             	</tr>
 	                            <tr>
