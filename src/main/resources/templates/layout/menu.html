@@ -14,7 +14,7 @@
 		<!-- Menu content -->
 		<ul class="nav flex-column text-white">
 			<div th:if = "${session.loginUser.getPId != 3}" class="list-group">
-				<a href="#"
+				<a href="/myApprovalList"
 					class="list-group-item list-group-item-action list-group-item-secondary mb-4 rounded">
 					내 결재 관리</a> 
 					<a href="/document"
@@ -26,7 +26,7 @@
 
 			</div>
 			<div th:if = "${session.loginUser.getPId == 3}" class="list-group">
-				<a href="#"
+				<a href="/myApprovalList"
 					class="list-group-item list-group-item-action list-group-item-secondary mb-4 rounded">
 					내 결재 관리</a> 
 					<a href="/document"
