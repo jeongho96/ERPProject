@@ -30,9 +30,9 @@ public class TravelDTO {
 	
 	private int tEtcCost;
 	
-	private String tStartDate;
+	private LocalDate tStartDate;
 	
-	private String tEndDate;
+	private LocalDate tEndDate;
 	
 	@Getter
 	@Setter

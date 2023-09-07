@@ -110,8 +110,8 @@ public class ManagementService {
 		travel.setTFoodCost(travelDTO.getTFoodCost());
 		travel.setTAccommodationCost(travelDTO.getTAccommodationCost());
 		travel.setTEtcCost(travelDTO.getTEtcCost());
-		travel.setTStartDate(travelDTO.getTStartDate());
-		travel.setTEndDate(travelDTO.getTEndDate());
+		travel.setTStartDate(travelDTO.getTStartDate().toString());
+		travel.setTEndDate(travelDTO.getTEndDate().toString());
 		
 		return travel;
 	}
@@ -151,8 +151,8 @@ public class ManagementService {
 		return partnameMapper.getPartnameWithUserNameAll();
 	}
 
-
-	public void updateVacations(MGVacationDTO vacation) {
+	
+	public void updateVacations(VacationDTO.MGVacationDTO vacation) {		
 		Map<String, Object> documentMap = new HashMap<>();
 		documentMap.put("dSeq", vacation.getDSeq());
 		documentMap.put("dDraftingDate", vacation.getDDraftingDate());
@@ -174,21 +174,34 @@ public class ManagementService {
 		aprvMap2.put("uName", vacation.getAprvName2());
 		
 		approverMapper.updateApproverId(aprvMap2);
-		
-		Map<String, Object> vacationMap = new HashMap<>();
-		vacationMap.put("dSeq", vacation.getDSeq());
-		vacationMap.put("vLeaveType", vacation.getVLeaveType());
-		vacationMap.put("vReason", vacation.getVReason());
-		vacationMap.put("vStartDate", vacation.getVStartDate());
-		vacationMap.put("vEndDate", vacation.getVEndDate());
-		vacationMap.put("vEmployeeContact", vacation.getVEmployeeContact());
-		
-		vacationMapper.update(vacationMap);
-		
+		vacationMapper.update(vacation);
 	}
 	
 	
+	public void updateTravels(TravelDTO.MGVacationDTO travel) {
+		Map<String, Object> documentMap = new HashMap<>();
+		documentMap.put("dSeq", travel.getDSeq());
+		documentMap.put("dDraftingDate", travel.getDDraftingDate());
+		
+		documentListMapper.updateDDraftingDate(documentMap);
+		
+		Map<String, Object> aprvMap1 = new HashMap<>();
+		aprvMap1.put("dSeq", travel.getDSeq());
+		aprvMap1.put("aOrderNum", 1);
+		aprvMap1.put("pName", travel.getAprvPa1());
+		aprvMap1.put("uName", travel.getAprvName1());
+		
+		approverMapper.updateApproverId(aprvMap1);
+		
+		Map<String, Object> aprvMap2 = new HashMap<>();
+		aprvMap2.put("dSeq", travel.getDSeq());
+		aprvMap2.put("aOrderNum", 2);
+		aprvMap2.put("pName", travel.getAprvPa2());
+		aprvMap2.put("uName", travel.getAprvName2());
+		
+		approverMapper.updateApproverId(aprvMap2);
+		travelMapper.update(travel);
+	}
 	
-
 		
 }

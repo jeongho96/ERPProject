@@ -11,5 +11,5 @@ import com.chonamzone.erpproject.model.VacationDTO.MGVacationDTO;
 public interface VacationMapper {
 	VacationDTO getVacationByDSeq(int dSeq);
 	void updateVacation(MGVacationDTO vacation);
-	void update(Map<String, Object> vacationMap);
+	void update(VacationDTO.MGVacationDTO vacation);
 }
