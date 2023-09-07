@@ -38,7 +38,7 @@ public class UserController {
 	public String index(HttpSession session, Model model) {
 		
 		session.setAttribute("loginUser", userService.getUserById((String)session.getAttribute("loginUserId")));
-		return "/index";
+		return "index";
 	}
 	
 	@GetMapping("/register")

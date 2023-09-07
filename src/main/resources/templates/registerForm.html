@@ -7,9 +7,22 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 </head>
 <body>
-    <div class="container mt-5">
+
+	<div th:replace="layout/header.html :: header"></div>
+	
+
+	 <!-- Menu and Content Section -->
+    <div class="container-fluid ">
+        <div class="row">
+            <!-- Menu Section -->
+            <div th:replace="layout/menu.html :: div"></div>
+            
+            
+           <!-- Content Section -->
+            <div class="col-md-10 bg-light bg-gradient h-auto">
+            	<div class="container mt-5">
         <h1 class="mb-4">사원 등록</h1>
-        <form method="post" action="/register" class="needs-validation" novalidate>
+        <form method="post" action="/register" class="needs-validation" >
         
             <div class="form-group">
                 <label for="uName">이름:</label>
@@ -58,6 +71,11 @@
             <button type="submit" class="btn btn-primary">가입</button>
         </form>
     </div>
+            
+            </div>
+        </div>
+    </div>
+    
 
     <!-- 부트스트랩 및 jQuery, Popper.js 스크립트 링크 추가 -->
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
