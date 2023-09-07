@@ -22,7 +22,7 @@ public class UserDTO {
 	
 	private String uEmail;											// 사내 이메일
 	
-	private LocalDate uHireDate;										// 입사일
+	private String uHireDate;										// 입사일
 	
 	private int pId;														// 부서 식별자
 		

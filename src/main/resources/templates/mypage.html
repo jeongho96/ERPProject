@@ -8,38 +8,70 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <!-- Custom CSS -->
     <link rel="stylesheet" href="styles.css">
+    
 </head>
 <body>
-    <div class="container h-100">
-        <div class="row h-100 justify-content-center align-items-center">
+
+	<!-- Include the header and menu from Thymeleaf fragments -->
+	<div th:replace="layout/header.html :: header"></div>
+	
+
+	 <!-- Menu and Content Section -->
+    <div class="container-fluid min-vh-100 d-flex flex-column">
+        <div class="row flex-grow-1">
+            <!-- Menu Section -->
+            <div th:replace="layout/menu.html :: div"  class="col-md-2 border"></div>
+            
+            
+           <!-- Content Section -->
+            <div class="container h-100">
+        	<div class="row h-100 justify-content-center align-items-center">
             <div class="col-md-4">
-                <form>
+                <form action = "/mypage" method = "POST" onsubmit = "return validatePwd()">
                     <div class="text-center mb-4">
-                        <img class="mb-4" src="your-logo.png" alt="Logo" width="360" height="360">
+                    	
                         <h1 class="h3 mb-3 font-weight-normal">Change Password</h1>
                     </div>
-
-                    <div class="form-group">
-                        <label for="currentPassword">Current Password</label>
-                        <input type="password" id="currentPassword" class="form-control" placeholder="Current Password" required autofocus>
-                    </div>
-
+                    
                     <div class="form-group">
                         <label for="newPassword">New Password</label>
-                        <input type="password" id="newPassword" class="form-control" placeholder="New Password" required>
+                        <input type="password" id="newPassword" name = "newPassword" class="form-control" placeholder="New Password" required>
                     </div>
 
                     <div class="form-group">
                         <label for="confirmPassword">Confirm Password</label>
-                        <input type="password" id="confirmPassword" class="form-control" placeholder="Confirm Password" required>
+                        <input type="password" id="confirmPassword" name = "confirmPassword" class="form-control" placeholder="Confirm Password" required>
                     </div>
 
                     <button class="btn btn-lg btn-primary btn-block" type="submit">Change Password</button>
+                    <button class="btn btn-lg btn-primary btn-block" onclick= "location.href = '/'">back to menu</button>
                 </form>
             </div>
+       	 	</div>
+    		</div>
         </div>
     </div>
+	
+   
 
+	<script>
+    function validatePwd() {
+        var newPassword = document.getElementById("newPassword").value;
+        var confirmPassword = document.getElementById("confirmPassword").value;
+        
+        // 널 값 혹은 빈 값에 대해서는 bootstrap의 required 사용
+        
+        // 3. newPassword와 confirmPassword는 같아야만 전송 가능
+        if (newPassword !== confirmPassword) {
+            alert("New password and confirm password do not match.");
+            return false;
+        }
+
+        // 모든 조건이 충족되면 폼 전송을 허용
+        return true;
+    }
+
+    </script>
     <!-- Bootstrap JS and Popper.js Links (Required for Bootstrap) -->
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@1.16.1/dist/umd/popper.min.js"></script>

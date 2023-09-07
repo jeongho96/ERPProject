@@ -13,7 +13,12 @@
         WHERE U_ID= #{uId}
     </select>
     
-    <!-- password encoding -->
+    <insert id="insertUser" parameterType="com.chonamzone.erpproject.model.UserDTO">
+        INSERT INTO USERS (U_ID, U_PWD, U_POSITION, U_NAME, U_PHONE, U_EMAIL, U_HIRE_DATE, P_ID)
+        VALUES ((SELECT NVL(MAX(U_ID), 0) + 1 FROM USERS), #{uPwd}, #{uPosition}, #{uName}, #{uPhone}, #{uEmail}, #{uHireDate}, #{pId})
+    </insert>
+    
+    
     <update id="updatePwd">
         UPDATE USERS
         SET U_PWD = #{uPwd}

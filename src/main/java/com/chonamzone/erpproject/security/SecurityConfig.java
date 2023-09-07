@@ -5,7 +5,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.security.servlet.PathRequest;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
+import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
@@ -24,8 +26,6 @@ import lombok.RequiredArgsConstructor;
 public class SecurityConfig extends WebSecurityConfigurerAdapter{
     
 	@Autowired
-    private UserService userService;
-	@Autowired
 	private LoginHandler loginHandler;
 
 	@Override
@@ -39,6 +39,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
         http
             .authorizeRequests()
                 .antMatchers("/login", "/signup").permitAll()
+                .antMatchers("/management/**").hasRole("ADMIN")
+                .antMatchers("/register").hasRole("ADMIN")
                 .requestMatchers(PathRequest.toStaticResources().atCommonLocations()).permitAll()
                 .anyRequest().authenticated()
                 .and()
@@ -53,7 +55,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
             .logout()
                 .logoutUrl("/logout")
                 .logoutSuccessHandler(loginHandler)
-                .invalidateHttpSession(true);
+                .invalidateHttpSession(true)
+                .and()
+                .exceptionHandling().accessDeniedPage("/access-denied");;;
 
         http.csrf().disable();
     }
@@ -61,5 +65,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
     @Bean
     public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
+    }
+    
+    @Bean
+    AuthenticationManager authenticationManager(AuthenticationConfiguration authenticationConfiguration) throws Exception {
+        return authenticationConfiguration.getAuthenticationManager();
     }
 }

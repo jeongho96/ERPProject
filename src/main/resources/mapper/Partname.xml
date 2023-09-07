@@ -11,6 +11,10 @@
 		</collection> 
 	</resultMap>
 	
+	<select id = "getAllPartNames" resultType = "com.chonamzone.erpproject.model.PartnameDTO">
+    	SELECT * FROM PARTNAMES
+    </select>
+	
 	<select id="getPartnameWithUserNameAll" resultMap="PartnameAllResultMap">
 		SELECT p.p_id, p.p_name, u.u_name
 		FROM partnames p

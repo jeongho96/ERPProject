@@ -3,12 +3,21 @@
 
 <mapper namespace="com.chonamzone.erpproject.mapper.VacationMapper">	<!-- xml파일을 사용할 mapper가 있는 경로 -->
 
-	
 	<select id="getVacationByDSeq" resultType="VacationDTO" parameterType="int">
 		SELECT *
 		FROM vacations
 		WHERE d_seq = #{dSeq}
 	</select>
+	
+	<update id="update" parameterType="java.util.Map">
+		UPDATE vacations
+		SET v_leave_type = #{vLeaveType},
+			v_reason = #{vReason},
+			v_start_date = #{vStartDate},
+			v_end_date = #{vEndDate},
+			v_employee_contact = #{vEmployeeContact}
+		WHERE d_seq = #{dSeq}
+	</update>
 	
 </mapper>
 	

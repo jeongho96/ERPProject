@@ -8,7 +8,7 @@ import com.chonamzone.erpproject.model.UserDTO;
 public interface UserMapper {
 	String getNameById(int id);
 	
-	// 로그인
+	void insertUser(UserDTO user);
 	UserDTO getUserById(int uId);
 	void updatePwd(int uId, String uPwd);
 	

@@ -11,6 +11,17 @@
 		WHERE a.d_seq = #{dSeq}
 	</select>
 	
-	
+	<update id="updateApproverId" parameterType="java.util.Map">
+	  UPDATE approvers a
+	  SET a.a_approver_id = (
+	    SELECT u.u_id
+	    FROM partnames p
+	    JOIN users u ON p.p_id = u.p_id
+	    WHERE p.p_name = #{pName}
+	      AND u.u_name = #{uName}
+	  )
+	  WHERE a.d_seq = #{dSeq}
+	  	AND a.a_order_num = #{aOrderNum}
+     </update>
 
 </mapper>
