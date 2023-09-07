@@ -31,6 +31,28 @@
 	</resultMap>
 	
 	
+	<select id="getManagementAllList" resultMap="ManagementListResultMap" parameterType="java.util.Map">
+		SELECT *
+		FROM (
+			SELECT 
+				ROWNUM AS rn,
+				d.d_seq,
+				d.d_drafting_date, 
+				d.d_status, 
+				d.d_drafter_id,
+				d.d_category, 
+				a.a_order_num, 
+				a.a_approver_id, 
+				a.a_approver_state
+			FROM document_list d
+			LEFT JOIN approvers a
+			ON d.d_seq = a.d_seq
+		)
+		WHERE rn &gt;= #{startPage}
+		AND rn &lt;= #{endPage}
+	</select>  
+	
+	
 	<select id="getManagementList" resultMap="ManagementListResultMap" parameterType="java.util.Map">
 		SELECT *
 		FROM (
@@ -46,12 +68,12 @@
 				a.a_approver_state
 			FROM document_list d
 			LEFT JOIN approvers a
-			on d.d_seq = a.d_seq
+			ON d.d_seq = a.d_seq
+			WHERE d.d_status = #{status}
 		)
 		WHERE rn &gt;= #{startPage}
 		AND rn &lt;= #{endPage}
 	</select>  
-	
 	
 	<select id="getDocumentListByDSeq" resultMap="ManagementListResultMap" parameterType="int">
 		SELECT *
@@ -63,8 +85,14 @@
 		UPDATE document_list
 		SET d_drafting_date = #{dDraftingDate}
 		WHERE d_seq = #{dSeq}
-			
 	</update>
 
+	<select id="getTotalCount" resultType="int">
+		SELECT COUNT(*)
+		FROM  document_list
+	</select>
+	
+	
+	
 	
 </mapper>
