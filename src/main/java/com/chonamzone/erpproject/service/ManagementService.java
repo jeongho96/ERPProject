@@ -1,7 +1,5 @@
 package com.chonamzone.erpproject.service;
 
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -17,6 +15,8 @@ import com.chonamzone.erpproject.mapper.UserMapper;
 import com.chonamzone.erpproject.mapper.VacationMapper;
 import com.chonamzone.erpproject.model.ApproverDTO;
 import com.chonamzone.erpproject.model.DocumentListDTO;
+import com.chonamzone.erpproject.model.DocumentListDTO.MGResponse;
+import com.chonamzone.erpproject.model.DocumentListDTO.MapperData;
 import com.chonamzone.erpproject.model.PartnameDTO;
 import com.chonamzone.erpproject.model.TravelDTO;
 import com.chonamzone.erpproject.model.UserDTO;
@@ -36,17 +36,40 @@ public class ManagementService {
 	private final UserMapper userMapper;
 	private final PartnameMapper partnameMapper;
 	
-
-	public List<DocumentListDTO.MGResponse> getManagementList(int page) {
+	/*
+	 * 통합 결재 관리 전체 보기
+	 */
+	public List<DocumentListDTO.MGResponse> getManagementAllList(int page) {
 		Map<String, Integer> pagination = new HashMap<>();
 		
 		// ROWNUM은 1부터 시작
 		pagination.put("startPage", (page-1)*10+1);
 		pagination.put("endPage", page*10);
 
-		List<DocumentListDTO.MapperData> documentMapperList = documentListMapper.getManagementList(pagination);
-		List<DocumentListDTO.MGResponse> documentResponseList = new ArrayList<>();
+		List<DocumentListDTO.MapperData> documentMapperList = documentListMapper.getManagementAllList(pagination);
+		return createResponseList(documentMapperList);
+	}
+	
+	/*
+	 * 통합 결재 관리 진행중, 반려, 승인 탭
+	 */
+	public List<DocumentListDTO.MGResponse> getManagementStatusList(int page, String status) {
+		Map<String, Object> map = new HashMap<>();
+
+		map.put("startPage", (page-1)*10+1);
+		map.put("endPage", page*10);
+		map.put("status", status);
+
+		List<DocumentListDTO.MapperData> documentMapperList = documentListMapper.getManagementList(map);
 		
+		return createResponseList(documentMapperList);
+	}
+	
+	/*
+	 * 통합 결재 관리 리스트에서 reponseList 만드는 함수
+	 */
+	private List<MGResponse> createResponseList(List<MapperData> documentMapperList) {
+		List<DocumentListDTO.MGResponse> documentResponseList = new ArrayList<>();
 		
 		for(DocumentListDTO.MapperData documentDTO : documentMapperList) {
 			DocumentListDTO.MGResponse documentResponse = new DocumentListDTO.MGResponse(documentDTO);
@@ -56,15 +79,41 @@ public class ManagementService {
 			documentResponse.idToName(drafterName, approverName);
 			
 			documentResponseList.add(documentResponse);
-
 		}
 		
 		return documentResponseList;
 	}
+
 	
 	
-	public TravelDTO getManagementTravel(int dSeq) {
-		return travelMapper.getTravelByDSeq(dSeq);
+	
+	public TravelDTO.MGVacationDTO getManagementTravel(int dSeq) {
+		DocumentListDTO.MapperData documentListDTO = documentListMapper.getDocumentListByDSeq(dSeq);
+		List<ApproverDTO.MGResponse> approversDTO = approverMapper.getApproverDetailsListByDSeq(dSeq);
+		TravelDTO travelDTO = travelMapper.getTravelByDSeq(dSeq);
+		UserDTO.MGResponse userDTO = userMapper.getUserWithPartnameById(documentListDTO.getDDrafterId());
+		
+		TravelDTO.MGVacationDTO travel = new TravelDTO.MGVacationDTO();
+		travel.setDSeq(documentListDTO.getDSeq());
+		travel.setDDraftingDate(documentListDTO.getDDraftingDate().toString());
+		travel.setAprvPa1(approversDTO.get(0).getPName());
+		travel.setAprvName1(approversDTO.get(0).getUName());
+		travel.setAprvPa2(approversDTO.get(1).getPName());
+		travel.setAprvName2(approversDTO.get(1).getUName());
+		travel.setPName(userDTO.getPName());
+		travel.setUName(userDTO.getUName());
+		travel.setUPosition(userDTO.getUPosition());
+		travel.setTLocation(travelDTO.getTLocation());
+		travel.setTReason(travelDTO.getTReason());
+		travel.setTAccommodation(travelDTO.getTAccommodation());
+		travel.setTTransCost(travelDTO.getTTransCost());
+		travel.setTFoodCost(travelDTO.getTFoodCost());
+		travel.setTAccommodationCost(travelDTO.getTAccommodationCost());
+		travel.setTEtcCost(travelDTO.getTEtcCost());
+		travel.setTStartDate(travelDTO.getTStartDate());
+		travel.setTEndDate(travelDTO.getTEndDate());
+		
+		return travel;
 	}
 	
 	public VacationDTO.MGVacationDTO getManagementVacation(int dSeq) {
@@ -90,7 +139,11 @@ public class ManagementService {
 		vacation.setVEmployeeContact(vacationDTO.getVEmployeeContact());
 		
 		return vacation;
-		
+	}
+
+	
+	public int getTotalPageCount() {
+		return (documentListMapper.getTotalCount() / 10) + 1;
 	}
 	
 	
@@ -133,6 +186,9 @@ public class ManagementService {
 		vacationMapper.update(vacationMap);
 		
 	}
+	
+	
+	
 
 		
 }

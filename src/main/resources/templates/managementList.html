@@ -30,10 +30,10 @@
 				 </div>
 				 
 				 <div id="select-status">
-					 <a class="selected-btn" href="#">전체</a>
-					 <a href="#">진행중</a>
-					 <a href="#">반려</a>
-					 <a href="#">결재</a>
+					 <a class="selected-btn" href="/management/all?page=1">전체</a>
+					 <a href="/management/progress?page=1">진행중</a>
+					 <a href="/management/refuse?page=1">반려</a>
+					 <a href="/management/approval?page=1">결재</a>
 				 </div>
 				 
 				 <div>
@@ -47,7 +47,7 @@
 							<th>진행상태</th>
 							<th>보기</th>
 						</tr>
-						<tr th:each="management : ${managementAllList}">
+						<tr th:each="management : ${managementList}">
 							<td th:text="${management.dDraftingDate}"></td>
 							<td th:text="${management.dCategory}"></td>
 							<td th:text="${management.dDrafterName}"></td>
@@ -61,6 +61,24 @@
 						</tr>
 					 </table>
 				 </div>
+				 <nav aria-label="Page navigation example">
+					<ul class="pagination">
+					    <li class="page-item">
+							
+					      <a class="page-link" aria-label="Previous">
+					        <span aria-hidden="true">&laquo;</span>
+					      </a>
+					    </li>
+					    <li class="page-item"  th:each="num : ${#numbers.sequence(1, totalPageCount)}">
+							<a class="page-link" th:href="@{/management/all?(page=${num})}" th:text="${num}"></a>
+					    </li>
+					    <li class="page-item">
+					      <a class="page-link" aria-label="Next">
+					        <span aria-hidden="true">&raquo;</span>
+					      </a>
+					    </li>
+					  </ul>
+				</nav>
             </div>
         </div>
     </div>
