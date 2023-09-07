@@ -9,4 +9,5 @@ import com.chonamzone.erpproject.model.PartnameDTO;
 @Mapper
 public interface PartnameMapper {
 	List<PartnameDTO.MGResponse> getPartnameWithUserNameAll();
+	List<PartnameDTO> getAllPartNames();
 }

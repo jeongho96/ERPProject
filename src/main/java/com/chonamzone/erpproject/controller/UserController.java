@@ -24,6 +24,11 @@ public class UserController {
 		return "login";
 	}
 	
+	@GetMapping("/access-denied")
+	  public String showAccessDeniedPage() {
+	    return "accessDenied";
+	  }
+	
 	@GetMapping("/home")
 	public String index(HttpSession session, Model model) {
 		

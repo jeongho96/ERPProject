@@ -4,21 +4,27 @@ import org.springframework.security.core.userdetails.UserDetails;
 
 import com.chonamzone.erpproject.model.UserDTO;
 
+import java.util.ArrayList;
 import java.util.Collection;
 
 public class CustomUserDetails implements UserDetails {
 
     private UserDTO userDTO;
+    private Collection<? extends GrantedAuthority> authorities = new ArrayList<>();
 
     public CustomUserDetails(UserDTO user) {
         this.userDTO = user;
     }
 
+    public void setAuthorities(Collection<? extends GrantedAuthority> authorities) {
+        this.authorities = authorities;
+    }
+
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        // 사용자의 권한을 반환 (권한 설정이 필요한 경우)
-        return null;
+        return authorities;
     }
+
 
     @Override
     public String getPassword() {
