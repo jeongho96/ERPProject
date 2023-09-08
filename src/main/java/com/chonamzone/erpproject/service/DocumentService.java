@@ -4,18 +4,23 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.chonamzone.erpproject.mapper.DocumentListMapper;
+import com.chonamzone.erpproject.mapper.PartnameMapper;
 import com.chonamzone.erpproject.mapper.VacationMapper;
 import com.chonamzone.erpproject.model.VacationDTO;
 
+import lombok.RequiredArgsConstructor;
+
 @Service  //서비스라고 적어줘야 서비스라고 알아들음!  //Been 등록 
+@RequiredArgsConstructor
 public class DocumentService {
 	
-	@Autowired
-	private VacationMapper vacationMapper;
-	/*
-	@Autowired
-	private DocumentListMapper documentListMapper;
-	 */
+	
+	private final VacationMapper vacationMapper;
+	private final PartnameMapper partnameMapper;
+	
+	
+//	private DocumentListMapper documentListMapper;
+
 	public void insert(VacationDTO.MGVacationDTO post, int loginId) {
 		
 		/*MyApproverDTO3 approverDTO3 = new MyApproverDTO3();*/
@@ -30,6 +35,11 @@ public class DocumentService {
 //		vacationMapper.insertApproval(post.getAprvPa2(), post.getAprvName2(), post.getDSeq());
 //		void insertApproval(int aOrderNum , int aApproverId, int dSeq);
 		
+	}
+	
+	
+	public String getPartname(int pId) {
+		return partnameMapper.getPartnameByPId(pId);
 	}
 
 }
