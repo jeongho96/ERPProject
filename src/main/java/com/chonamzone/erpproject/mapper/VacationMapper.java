@@ -10,6 +10,8 @@ import com.chonamzone.erpproject.model.VacationDTO.MGVacationDTO;
 @Mapper
 public interface VacationMapper {
 	VacationDTO getVacationByDSeq(int dSeq);
-	void updateVacation(MGVacationDTO vacation);
-	void update(VacationDTO.MGVacationDTO vacation);
+	void update(MGVacationDTO vacation);
+	void insert(VacationDTO.MGVacationDTO post);
+	void insertDocList(int id);
+	void insertApproval(int aOrderNum , int aApproverId, int dSeq);
 }
