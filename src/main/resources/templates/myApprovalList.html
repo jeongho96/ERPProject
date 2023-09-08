@@ -36,16 +36,16 @@
 					 <a href="#">결재</a>
 				 </div>
 				 
-				 <div>
-					 <table id="contents" style="border: 1px solid #444444;">
+				 <div style="margin-top: 15px;">
+					 <table id="contents">
 						 <tr>
-							<th>기안일자</th>
-							<th>구분</th>
-							<th>기안자</th>
-							<th>결재자</th>
-							<th>결재순서</th>
-							<th>진행상태</th>
-							<th>보기</th>
+							<th style="width: 100px;">기안일자</th>
+							<th style="width: 100px;">구분</th>
+							<th style="width: 100px;">기안자</th>
+							<th style="width: 100px;">결재자</th>
+							<th style="width: 100px;">결재순서</th>
+							<th style="width: 100px;">진행상태</th>
+							<th style="width: 100px;">보기</th>
 						</tr>
 						<tr th:each="list : ${posts}">
 				<td th:text="${list.dCategory}"></td>
@@ -61,7 +61,7 @@
 						</tr>
 					 </table>
 				 </div>
-<ul class="pagination">
+<ul class="pagination" style="    margin-top: 500px;">
 		<li th:if="${currentPage > 1}">
 			<a th:href="@{/list(page=1)}">첫 페이지</a>
 		</li>
