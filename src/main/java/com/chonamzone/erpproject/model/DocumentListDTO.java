@@ -8,7 +8,17 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+@Getter
+@Setter
+@AllArgsConstructor
 public class DocumentListDTO {
+		
+		private int dSeq;		
+		private String dDraftingDate;	
+		private int dDrafterId;	
+		private String dStatus;
+		private String dCategory;
+	
 	
 	@Getter
 	@Setter
