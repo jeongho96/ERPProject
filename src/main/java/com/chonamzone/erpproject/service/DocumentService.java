@@ -6,6 +6,8 @@ import org.springframework.stereotype.Service;
 import com.chonamzone.erpproject.mapper.DocumentListMapper;
 import com.chonamzone.erpproject.mapper.PartnameMapper;
 import com.chonamzone.erpproject.mapper.VacationMapper;
+import com.chonamzone.erpproject.model.DocumentListDTO;
+import com.chonamzone.erpproject.model.MyApprovalDTO3;
 import com.chonamzone.erpproject.model.VacationDTO;
 
 import lombok.RequiredArgsConstructor;
@@ -14,17 +16,16 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public class DocumentService {
 	
-	
 	private final VacationMapper vacationMapper;
 	private final PartnameMapper partnameMapper;
-	
-	
-//	private DocumentListMapper documentListMapper;
+	private final DocumentListMapper documentListMapper;
 
 	public void insert(VacationDTO.MGVacationDTO post, int loginId) {
 		
-		/*MyApproverDTO3 approverDTO3 = new MyApproverDTO3();*/
-		System.out.println(loginId);
+		DocumentListDTO documentList = new DocumentListDTO(0, post.getDDraftingDate().toString(), loginId, "진행중", "휴가신청서");
+		
+		documentListMapper.insert(documentList);
+		
 		vacationMapper.insertDocList(loginId);
 		vacationMapper.insert(post);
 		System.out.println(post.getDSeq());
