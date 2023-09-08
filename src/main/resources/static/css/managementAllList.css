@@ -64,6 +64,7 @@
 	height: 36px;
 	left: 366px;
 	top: 245px;
+	margin-bottom: 30px;
 	
 	
 }
@@ -86,6 +87,53 @@
 
 
 }
+.pagination {
+    margin-top: 100px;
+    display: flex;
+    padding-left: 0;
+    list-style: none;
+    border-radius: 0.25rem;
+}
 
+th {
+	font-family: 'Fascinate';
+    font-style: normal;
+    font-weight: 900;
+    font-size: 20px;
+    line-height: 27px;
+    color: #4F7578;
+	width: 200px;
+}
+#under {
+	display: flex;
+}
 
+  .under-one {
+	  /* 제출 */
+	margin-left: 900px;
+    margin-top: 5px;
+    margin-bottom: 5px;
+  }
+  
+  #under input {
+	  margin: 3.5px;
+   width: 150px;
+    height: 50px;
+    background-color: white;
+    color: #4F7578;
+    border: none;
+    border-radius: 50%;
+    cursor: pointer;
+    font-family: 'Fascinate';
+    font-style: normal;
+    font-weight: 900;
+    font-size: 20px;
+    line-height: 27px;
+  }
+  .under-two {
+	  /*  취소  */
 
+    margin-top: 5px;
+    margin-bottom: 5px;
+
+  }
