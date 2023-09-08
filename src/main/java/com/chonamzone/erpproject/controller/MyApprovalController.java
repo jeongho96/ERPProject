@@ -63,8 +63,7 @@ public class MyApprovalController {
     		
     		
     	    check = myApprovalService.nowApproval(dSeq, loginid, DrafterDto.getDDrafterId());
-    	    
-    		List<MyApprovalDTO2> ADto = myApprovalService.selectByApprovers(dSeq);
+
     		System.out.println(dSeq);
     		
     		// Travel로 가져오고 있고, managemantService 106번 오류, 그리고 기안자가 반드시 두명이어야함
@@ -76,13 +75,13 @@ public class MyApprovalController {
     	
     		model.addAttribute("travel", managementService.getManagementTravel(dSeq));
     		model.addAttribute("partnames", managementService.getPartnameWithUsernameAll());
-    		return "myApprovalTravel2";
+    		return "myApprovalTravel";
     		
     	}else {
  
     		model.addAttribute("vacation", managementService.getManagementVacation(dSeq) );
     		model.addAttribute("partnames", managementService.getPartnameWithUsernameAll());
-        return "myApprovalVacation2";
+        return "myApprovalVacation";
     	}
     }
     
