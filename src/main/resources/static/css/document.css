@@ -1,11 +1,9 @@
   #header {
     /* 기안서 작성 */
-	
-	
-
-	font-size: 20px;
-	color: #4F7578;
-	font-weight: 700;
+	margin-top: 15px;
+    font-size: 15px;
+    color: #4F7578;
+    font-weight: 700;
 	
 
 
@@ -18,7 +16,7 @@
 	left: 366px;
 	top: 256px;
 	
-	background: #DCDED4;
+	/*background: #DCDED4;*/
 
   }
   
@@ -28,11 +26,13 @@
   }
   
   .order-number {
-  	position: absolute;
-    width: 700px;
-   	height: 21px;
-    left: 140px;
-    top: 50px;
+	 margin-left: 40px;
+    margin-top: 30px;
+    /* position: absolute; */
+    width: 600px;
+    /* height: 21px; */
+    /* left: 140px; */
+    /* top: 50px; */
     display: flex;
     font-family: 'Fascinate';
     font-style: normal;
@@ -40,18 +40,16 @@
     font-size: 20px;
     line-height: 27px;
     color: #4F7578;
-    flex-wrap: nowrap;
-    flex-direction: row;
-    align-content: center;
     justify-content: space-between;
 }
   
   .order-number-one {
-    position: absolute;
-    width: 812px;
+    margin-top: 15px;
+    /* position: absolute; */
+    width: 700px;
     height: 43px;
-    left: 90px;
-    top: 130px;
+    /* left: 90px; */
+    /* top: 130px; */
     background: #FFFFFF;
     display: flex;
     justify-content: space-around;
@@ -65,11 +63,12 @@
   }
   
   .order-number-two {
-	position: absolute;
-    width: 812px;
+	margin-top: 15px;
+    /* position: absolute; */
+    width: 700px;
     height: 43px;
-    left: 92px;
-    top: 200px;
+    /* left: 90px; */
+    /* top: 130px; */
     background: #FFFFFF;
     display: flex;
     justify-content: space-around;
@@ -86,20 +85,15 @@
   
   #print-button {
 	
-	position: absolute;
-	width: 227px;
-	height: 56px;
-	left: 1172px;
-	top: 746px;
-	
-	background: #DCDED4;
-
+	margin-top: 400px;
+    margin-left: 490px;
+    margin-bottom: 10px;
   }
   
  
  #print-button button {
 	margin: 3.5px;
-    width: 221px;
+    width: 200px;
     height: 50px;
     background-color: white;
     color: #4F7578;
