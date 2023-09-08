@@ -1,18 +1,14 @@
 package com.chonamzone.erpproject.controller;
 
-import java.time.LocalDate;
-
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 
-import com.chonamzone.erpproject.model.MyApprovalDTO3;
 import com.chonamzone.erpproject.model.UserDTO;
 import com.chonamzone.erpproject.model.VacationDTO;
 import com.chonamzone.erpproject.service.DocumentService;
@@ -44,19 +40,16 @@ public class DocumentController {
 	
 	@GetMapping("/document/travel")
 	public String documenttravelcontroller() {
-		return"documentTravel";
+		return "documentTravel";
 	}
 	
 	
 	@PostMapping("/document/vacation") 
 	public String documentVacationInsertController(@ModelAttribute("vacation") VacationDTO.MGVacationDTO vacation,HttpSession session ) {
-		UserDTO userDTO = (UserDTO) session.getAttribute("loginUser");
-		int loginId = userDTO.getUId();
-		
-		
-		documentService.insert(vacation, loginId);
+		UserDTO userDTO = (UserDTO) session.getAttribute("loginUser");		
+		documentService.insert(vacation,  userDTO.getUId());
 	
-		return"documentVacation";
+		return "documentVacation";
 	}
 
 }
