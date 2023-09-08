@@ -1,13 +1,13 @@
 package com.chonamzone.erpproject.service;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.chonamzone.erpproject.mapper.ApproverMapper;
 import com.chonamzone.erpproject.mapper.DocumentListMapper;
 import com.chonamzone.erpproject.mapper.PartnameMapper;
 import com.chonamzone.erpproject.mapper.VacationMapper;
+import com.chonamzone.erpproject.model.ApproverDTO;
 import com.chonamzone.erpproject.model.DocumentListDTO;
-import com.chonamzone.erpproject.model.MyApprovalDTO3;
 import com.chonamzone.erpproject.model.VacationDTO;
 
 import lombok.RequiredArgsConstructor;
@@ -19,22 +19,27 @@ public class DocumentService {
 	private final VacationMapper vacationMapper;
 	private final PartnameMapper partnameMapper;
 	private final DocumentListMapper documentListMapper;
-
+	private final ApproverMapper approverMapper;
+	
 	public void insert(VacationDTO.MGVacationDTO post, int loginId) {
-		
-		DocumentListDTO documentList = new DocumentListDTO(0, post.getDDraftingDate().toString(), loginId, "진행중", "휴가신청서");
+		DocumentListDTO documentList = new DocumentListDTO();
+		documentList.setDDraftingDate(post.getDDraftingDate().toString());
+		documentList.setDDrafterId(loginId);
+		documentList.setDStatus("진행중");
+		documentList.setDCategory("휴가신청서");
 		
 		documentListMapper.insert(documentList);
+	
+		System.out.println(documentList.getDSeq());
 		
-		vacationMapper.insertDocList(loginId);
+		post.setDSeq(documentList.getDSeq());
 		vacationMapper.insert(post);
-		System.out.println(post.getDSeq());
 		
-//		
-////		반드시 두개 선택해서 approval 입력시킴
-//		vacationMapper.insertApproval(post.getAprvPa1(), post.getAprvName1(), post.getDSeq());
-//		vacationMapper.insertApproval(post.getAprvPa2(), post.getAprvName2(), post.getDSeq());
-//		void insertApproval(int aOrderNum , int aApproverId, int dSeq);
+//		ApproverDTO approver = new ApproverDTO();
+//		approver.setAOrderNum(1);
+//		approver.setDSeq(documentList.getDSeq());
+//		approver.setAApproverState("대기");
+//		approverMapper.insert(post);
 		
 	}
 	

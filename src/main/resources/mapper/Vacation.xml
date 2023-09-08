@@ -19,23 +19,11 @@
 		WHERE d_seq = #{dSeq}
 	</update>
 
- 	<insert id="insertDocList" parameterType="int" useGeneratedKeys="true" keyProperty="d_seq">
-	    INSERT INTO document_list (d_seq, d_drafting_date, d_status, d_drafter_id, d_category) 
-	    VALUES(d_seq.NEXTVAL, TO_CHAR(SYSDATE, 'YY/MM/DD'), '진행중', 3, '휴가신청서')
-	</insert>
-	
+ 	
 	<insert id="insert" parameterType="com.chonamzone.erpproject.model.VacationDTO$MGVacationDTO">
 		INSERT INTO VACATIONS (d_seq, v_leave_type, v_reason, v_start_date, v_end_date, v_employee_contact)
 			VALUES (#{dSeq}, #{vLeaveType}, #{vReason}, #{vStartDate}, #{vEndDate}, #{vEmployeeContact})
 	</insert> 
-	
-	
-	
-	<select id="insertApproval" parameterType="int">
-    	insert into approvers
-    	(a_seq, a_order_num, a_approver_id, a_approver_state, d_seq) values
-    	(a_seq.NEXTVAL, #{aOrderNum}, #{aApproverId}, '대기', #{dSeq})
-    </select>
 	
 </mapper>
 	

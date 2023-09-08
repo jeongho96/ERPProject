@@ -3,21 +3,6 @@
 
 <mapper namespace="com.chonamzone.erpproject.mapper.DocumentListMapper">	<!-- xml파일을 사용할 mapper가 있는 경로 -->
 
-	<!-- <resultMap id="DocumentListResultMap" type="com.chonamzone.myerpproject.model.DocumentListDTO$MapperData">
-		<id property="dSeq" column="d_seq" />
-		<result property="dDraftingDate" column="d_drafting_date" />
-		<result property="dStatus" column="d_status" />
-		<result property="dDrafterId" column="d_drafter_id" />
-		<result property="dCategory" column="d_category" />
-		<collection property="approversList" ofType="ApproversDTO">
-			<id property="aSeq" column="a_seq" />
-			<result property="aOrderNum" column="a_order_num" />
-			<result property="aApproverId" column="a_approver_id" />
-			<result property="aApproverState" column="a_approver_state" />
-			<result property="dSeq" column="d_seq" />
-		</collection> 
-	</resultMap> -->
-
 	<resultMap id="ManagementListResultMap" type="com.chonamzone.erpproject.model.DocumentListDTO$MapperData">
 			<id property="dSeq" column="d_seq" />
 			<result property="dDraftingDate" column="d_drafting_date" />
@@ -27,8 +12,8 @@
 			<result property="aApproverId" column="a_approver_id" />
 			<result property="aOrderNum" column="a_order_num" />
 			<result property="aApproverState" column="a_approver_state" />
-	
 	</resultMap>
+	
 	
     <select id="getManagementAllList" resultMap="ManagementListResultMap" parameterType="java.util.Map">
 		SELECT *
@@ -88,13 +73,16 @@
 		WHERE d_seq = #{dSeq}
 			
 	</update>
+
 	
-	<insert id="insertDoc" parameterType="com.chonamzone.erpproject.model.MyApprovalDTO3">
-		INSERT INTO document_list (d_seq, d_drafting_date, d_status, d_drafter_id, d_category) VALUES
-		(20, #{dDraftingDate},'진행중' , #{dDrafterId}, #{dCategory} );	
+	<insert id="insert" parameterType="com.chonamzone.erpproject.model.DocumentListDTO">
+	     <selectKey keyProperty="dSeq" resultType="int" order="BEFORE">
+	        SELECT d_seq.NEXTVAL FROM dual
+	    </selectKey>
+	    INSERT INTO document_list (d_seq, d_drafting_date, d_status, d_drafter_id, d_category) 
+	    VALUES(#{dSeq}, #{dDraftingDate}, #{dStatus}, #{dDrafterId} , #{dCategory})
 	</insert>
 	
-    
 
 	
 </mapper>

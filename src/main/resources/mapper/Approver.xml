@@ -24,4 +24,9 @@
 	  	AND a.a_order_num = #{aOrderNum}
      </update>
 
+
+	<insert id="insert" parameterType="com.chonamzone.erpproject.model.VacationDTO$MGVacationDTO" useGeneratedKeys="true" keyProperty="aSeq">
+    	INSERT INTO approvers (a_seq, a_order_num, a_approver_id, a_approver_state, d_seq) 
+    	VALUES (a_seq.NEXTVAL, #{aOrderNum}, #{aApproverId}, '대기', #{dSeq})
+    </insert>
 </mapper>
