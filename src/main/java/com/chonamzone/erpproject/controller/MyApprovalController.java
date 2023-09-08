@@ -18,17 +18,21 @@ import com.chonamzone.erpproject.model.MyApprovalDTO;
 import com.chonamzone.erpproject.model.MyApprovalDTO2;
 import com.chonamzone.erpproject.model.MyApprovalDTO3;
 import com.chonamzone.erpproject.model.MyApprovalStateDO;
+import com.chonamzone.erpproject.model.TravelDTO;
 import com.chonamzone.erpproject.model.UserDTO;
+import com.chonamzone.erpproject.model.VacationDTO.MGVacationDTO;
 import com.chonamzone.erpproject.service.ManagementService;
 import com.chonamzone.erpproject.service.MyApprovalService;
 
+import lombok.RequiredArgsConstructor;
+
 
 @Controller
+@RequiredArgsConstructor
 public class MyApprovalController {
 	
-	@Autowired
-	private MyApprovalService myApprovalService;
-	private ManagementService managementService;
+	private final MyApprovalService myApprovalService;
+	private final ManagementService managementService;
 	
 	
 	@GetMapping("/myApprovalList")
@@ -59,19 +63,24 @@ public class MyApprovalController {
     		
     		
     	    check = myApprovalService.nowApproval(dSeq, loginid, DrafterDto.getDDrafterId());
-    	    
-    		List<MyApprovalDTO2> ADto = myApprovalService.selectByApprovers(dSeq);
-    		model.addAttribute("approver", ADto);
-    		model.addAttribute("check", check );
-    	if(DrafterDto.getDCategory().equals("출장보고서")) {
+
+    		System.out.println(dSeq);
     		
-    		//model.addAttribute("travel", managementService.getManagementTravel(dSeq));
-    		//model.addAttribute("partnames", managementService.getPartnameWithUsernameAll());
+    		// Travel로 가져오고 있고, managemantService 106번 오류, 그리고 기안자가 반드시 두명이어야함
+    		// 하지만 앞으로의 조건이 기안자는 반드시 두명을 할 것이라 걱정할 것 없음
+    		model.addAttribute("mylist", DrafterDto);
+    		model.addAttribute("check", check );
+
+    	if(DrafterDto.getDCategory().equals("출장보고서")) {
+    	
+    		model.addAttribute("travel", managementService.getManagementTravel(dSeq));
+    		model.addAttribute("partnames", managementService.getPartnameWithUsernameAll());
     		return "myApprovalTravel";
     		
     	}else {
-    		//model.addAttribute("vacation", managementService.getManagementVacation(dSeq));
-    		//model.addAttribute("partnames", managementService.getPartnameWithUsernameAll());
+ 
+    		model.addAttribute("vacation", managementService.getManagementVacation(dSeq) );
+    		model.addAttribute("partnames", managementService.getPartnameWithUsernameAll());
         return "myApprovalVacation";
     	}
     }
