@@ -13,11 +13,11 @@ import lombok.Setter;
 @AllArgsConstructor
 public class DocumentListDTO {
 		
-		private int dSeq;		
-		private String dDraftingDate;	
-		private int dDrafterId;	
-		private String dStatus;
-		private String dCategory;
+	private int dSeq;		
+	private String dDraftingDate;	
+	private int dDrafterId;	
+	private String dStatus;
+	private String dCategory;
 	
 	
 	@Getter

@@ -4,23 +4,18 @@ import java.util.List;
 
 import javax.servlet.http.HttpSession;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.chonamzone.erpproject.model.DocumentListDTO;
 import com.chonamzone.erpproject.model.MyApprovalDTO;
-import com.chonamzone.erpproject.model.MyApprovalDTO2;
-import com.chonamzone.erpproject.model.MyApprovalDTO3;
 import com.chonamzone.erpproject.model.MyApprovalStateDO;
-import com.chonamzone.erpproject.model.TravelDTO;
 import com.chonamzone.erpproject.model.UserDTO;
-import com.chonamzone.erpproject.model.VacationDTO.MGVacationDTO;
 import com.chonamzone.erpproject.service.ManagementService;
 import com.chonamzone.erpproject.service.MyApprovalService;
 
@@ -59,7 +54,7 @@ public class MyApprovalController {
     	
     	int check = 0;
     	//문서 정보 담기
-    	MyApprovalDTO3 DrafterDto = myApprovalService.selectByDSeq(dSeq);
+    	DocumentListDTO.MapperData DrafterDto = myApprovalService.selectByDSeq(dSeq);
     		
     	    check = myApprovalService.nowApproval(dSeq, loginid, DrafterDto.getDDrafterId());
 
@@ -80,16 +75,16 @@ public class MyApprovalController {
     	}
     }
     
-    @PutMapping("/dicision")
+    @PostMapping("/decision")
     public String getData(@ModelAttribute MyApprovalStateDO DO, Model model, HttpSession session) {
         
 		UserDTO userDTO= (UserDTO)session.getAttribute("loginUser");
 		int loginid = userDTO.getUId();
         String state = DO.getState();
         int dSeq = DO.getDSeq();
-        System.out.println(state);
-        System.out.println(dSeq);
-		MyApprovalDTO3 DrafterDto = myApprovalService.selectByDSeq(dSeq);
+        System.out.println("state :" + state);
+        System.out.println("dSeq : " + dSeq);
+        DocumentListDTO.MapperData DrafterDto = myApprovalService.selectByDSeq(dSeq);
 		System.out.println(state);
         myApprovalService.approvalState(state, dSeq, loginid);
 		
@@ -98,11 +93,11 @@ public class MyApprovalController {
 		}else if(DrafterDto.getDCategory().equals("출장보고서")){
 		//리 다이렉트나 출장보고서 정보 담아서 보내기
 		//model.addAttribute("travelInfo", tInfo );
-		  return "redirect:/testdoc/" + dSeq;
+		  return "redirect:/myApprovaldoc/" + dSeq;
 		}else{
 		//리 다이렉트나 휴가신청서 정보 담아서 보내기
 		 //model.addAttribute("vacationInfo", vInfo );
-			return "redirect:/testdoc/" + dSeq;
+			return "redirect:/myApprovaldoc/" + dSeq;
       	}
         
     }

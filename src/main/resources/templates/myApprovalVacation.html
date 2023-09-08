@@ -112,18 +112,18 @@
 	                        </div>
 	                    </div>
 	
-		                
+		                   </form>
 	                </div>
 	                <!-- 마무리단계. -->
 				     <div th:if="${check == 1}">
-					     <form th:action="@{/dicision}" method="post" th:object="${dataObject}">
+					     <form th:action="@{/decision}" method="post" th:object="${MyApprovalStateDO}">
 				        <input type="hidden" name="dSeq" th:value="${mylist.dSeq}" />
 				        <input type="hidden" name="state" th:value="결재" />
 				        <button type="submit">결재</button>
 				    </form>
 				    </div>
 				    <div th:if="${check == 1}">
-				     <form th:action="@{/decision}" method="post">
+				     <form th:action="@{/decision}" method="put" th:object="${MyApprovalStateDO}">
 				         <input type="hidden" name="dSeq" th:value="${mylist.dSeq}" />
 				        <input type="hidden" name="state" th:value="반려" />
 				        <button type="submit">반려</button>
@@ -136,7 +136,7 @@
 				        <button th:text="결재취소">결재취소</button>
 						<!--</form>-->
 				    </div>
-				    </form>
+				 
 	        </div>
 	    </div>
 	</div>

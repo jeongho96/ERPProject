@@ -12,6 +12,7 @@
 		<result property="date" column="dDraftingDate" />
 		<result property="dStatus" column="dStatus" />
 	</resultMap>
+	
 
 
 
@@ -93,7 +94,7 @@ SELECT * FROM (
 		where d.d_seq = #{dSeq}
 	</select>
 	
-	<select id="selectByDSeq" resultType="com.chonamzone.erpproject.model.MyApprovalDTO3"
+	<select id="selectByDSeq" resultType="com.chonamzone.erpproject.model.DocumentListDTO"
 		parameterType="int">
 		SELECT
 		*
@@ -123,7 +124,7 @@ SELECT * FROM (
 	</select>
 
 	<select id="selectApprovers"
-		resultType="com.chonamzone.erpproject.model.MyApprovalDTO2"
+		resultType="com.chonamzone.erpproject.model.ApproverDTO"
 		parameterType="int">
 		select *
 		from approvers
@@ -132,7 +133,7 @@ SELECT * FROM (
 	</select>
 
 	<select id="selectOrder"
-		resultType="com.chonamzone.erpproject.model.MyApprovalDTO2"
+		resultType="com.chonamzone.erpproject.model.ApproverDTO"
 		parameterType="int">
 		select *
 		from approvers
