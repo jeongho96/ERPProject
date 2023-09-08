@@ -1,6 +1,7 @@
 package com.chonamzone.erpproject.model;
 
 import java.time.LocalDate;
+import java.util.List;
 
 import lombok.Builder;
 //DTO는 모델 선언을 하는 곳이다.
@@ -48,8 +49,11 @@ public class VacationDTO {
 		private String vEndDate;
 		private String vEmployeeContact;
 		
+		public void setUserData(UserDTO userDTO) {
+			this.dDraftingDate = LocalDate.now().toString();
+			this.uName = userDTO.getUName();
+			this.uPosition = userDTO.getUPosition();
+		}
+		
 	}
-	
-	
-
 }

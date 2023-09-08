@@ -38,7 +38,7 @@
 						<!-- 일자선택  -->
 				        <div id="dateInputContainer">
 				          <label for="dateInput">일자 </label>
-				          <input type="date" th:field="*{dDraftingDate}" id="dateInput" name="dateInput" th:value="${#calendars.format(#calendars.createNow(), 'yyyy-MM-dd')}">
+				          <input type="date" th:field="*{dDraftingDate}" id="dateInput" name="dateInput" readonly>
 				        </div>
 				        
 				       <!-- 구분선택. -->
@@ -89,7 +89,7 @@
 				           <table>
 							    <tr>
 							      <td><span class="info-label">부서</span></td>
-							      <td><input class="info-input" th:field="*{pName}" type="text" name="department"></td>
+							      <td><input class="info-input" th:field="*{pName}" type="text" name="department" disabled></td>
 							    </tr>
 							    <tr>
 							      <td><span class="info-label">성명</span></td>
