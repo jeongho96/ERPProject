@@ -28,5 +28,12 @@
 		INNER JOIN users u
 		ON p.p_id=u.p_id
 	</select>  -->
+	
+	<select id="getPartnameByPId" resultType="java.lang.String">
+		SELECT p_name
+		FROM partnames
+		WHERE p_id = #{PId}
+	</select>
+	
 </mapper>
 
