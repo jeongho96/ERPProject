@@ -142,11 +142,6 @@ public class ManagementService {
 	}
 
 	
-	public int getTotalPageCount() {
-		return (documentListMapper.getTotalCount() / 10) + 1;
-	}
-	
-	
 	public List<PartnameDTO.MGResponse> getPartnameWithUsernameAll(){
 		return partnameMapper.getPartnameWithUserNameAll();
 	}

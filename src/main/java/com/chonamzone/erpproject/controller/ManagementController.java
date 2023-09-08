@@ -1,5 +1,7 @@
 package com.chonamzone.erpproject.controller;
 
+import java.util.List;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -8,6 +10,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.chonamzone.erpproject.model.DocumentListDTO.MGResponse;
 import com.chonamzone.erpproject.model.TravelDTO;
 import com.chonamzone.erpproject.model.VacationDTO;
 import com.chonamzone.erpproject.service.ManagementService;
@@ -22,8 +25,9 @@ public class ManagementController {
 
 	@GetMapping("/management/all")
 	public String managementAllList(@RequestParam int page, Model model) {
-		model.addAttribute("managementList", managementService.getManagementAllList(page));
-		model.addAttribute("totalPageCount", managementService.getTotalPageCount());
+		List<MGResponse> managementList = managementService.getManagementAllList(page);
+		model.addAttribute("managementList", managementList);
+		model.addAttribute("totalPageCount", (managementList.size() / 10) + 1);
 		model.addAttribute("nowPage", page);
 
 		return "managementList";
@@ -31,8 +35,9 @@ public class ManagementController {
 
 	@GetMapping("/management/progress")
 	public String managementProgressList(@RequestParam int page, Model model) {
-		model.addAttribute("managementList", managementService.getManagementStatusList(page, "진행중"));
-		model.addAttribute("totalPageCount", managementService.getTotalPageCount());
+		List<MGResponse> managementList = managementService.getManagementStatusList(page, "진행중");
+		model.addAttribute("managementList", managementList);
+		model.addAttribute("totalPageCount", (managementList.size() / 10) + 1);
 		model.addAttribute("nowPage", page);
 
 		return "managementList";
@@ -40,8 +45,9 @@ public class ManagementController {
 
 	@GetMapping("/management/refuse")
 	public String managementRefuseList(@RequestParam int page, Model model) {
-		model.addAttribute("managementList", managementService.getManagementStatusList(page, "반려"));
-		model.addAttribute("totalPageCount", managementService.getTotalPageCount());
+		List<MGResponse> managementList = managementService.getManagementStatusList(page, "반려");
+		model.addAttribute("managementList", managementList);
+		model.addAttribute("totalPageCount", (managementList.size() / 10) + 1);
 		model.addAttribute("nowPage", page);
 
 		return "managementList";
@@ -49,8 +55,9 @@ public class ManagementController {
 
 	@GetMapping("/management/approval")
 	public String managementApprovalList(@RequestParam int page, Model model) {
-		model.addAttribute("managementList", managementService.getManagementStatusList(page, "최종승인"));
-		model.addAttribute("totalPageCount", managementService.getTotalPageCount());
+		List<MGResponse> managementList = managementService.getManagementStatusList(page, "최종승인");
+		model.addAttribute("managementList", managementList);
+		model.addAttribute("totalPageCount", (managementList.size() / 10) + 1);
 		model.addAttribute("nowPage", page);
 
 		return "managementList";

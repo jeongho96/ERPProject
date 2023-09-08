@@ -15,5 +15,4 @@ public interface DocumentListMapper {
 	List<DocumentListDTO.MapperData> getManagementList(Map<String, Object> map);
 	DocumentListDTO.MapperData getDocumentListByDSeq(int dSeq);
 	void updateDDraftingDate(Map<String, Object> map);
-	int getTotalCount();
 }
