@@ -55,12 +55,16 @@ public class MyApprovalService {
     	
     	//순수 문서정보만
     	MyApprovalDTO3 DrafterDto = myapprovalmapper.selectByDSeq(dSeq);
-	
     	
-		if(DrafterDto.getDDrafterId() != loginId) {//결재자라면
-
-    		if(Dto.getDStatus().equals
-    			("진행중") && (((loginDto.getAOrderNum() == 1)&&(myapprovalmapper.selectOrder(dSeq, 1).getAApproverState().equals("대기")))||
+    	if(DrafterDto.getDStatus().equals("반려")||DrafterDto.getDStatus().equals("최종승인")) {
+    		check = 0;
+    	}
+    	else if(DrafterDto.getDDrafterId() == loginId && myapprovalmapper.selectOrder(dSeq, 1).getAApproverState().equals("대기")) {
+    	check = 2;
+    	}else if(DrafterDto.getDDrafterId() != loginId) {//결재자라면
+		//여기 조건도 다시 설정해야할듯
+    		if(Dto.getDStatus().equals("진행중")
+    				&& (((loginDto.getAOrderNum() == 1)&&(myapprovalmapper.selectOrder(dSeq, 1).getAApproverState().equals("대기")))||
     				(loginDto.getAOrderNum() == 2 && myapprovalmapper.selectOrder(dSeq, 1).getAApproverState().equals("승인")))) {
     			check = 1;
     			}
@@ -68,7 +72,7 @@ public class MyApprovalService {
 		}else if(myapprovalmapper.selectOrder(dSeq, 1).getAApproverState().equals("대기")) {
 				check = 2;
 			}else {
-				check = 1;
+				check = 0;
 			}
 		
     	return check;
