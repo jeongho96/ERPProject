@@ -55,8 +55,8 @@
 				<td th:text="${list.dDraftingDate}"></td>
 				<td th:text="${list.dStatus}"></td>
 				<td>
-					<a th:if="${list.dCategory == '출장보고서'}" th:href="@{/testdoc/{dSeq}(dSeq=${list.dSeq})}">보기</a>
-					<a th:if="${list.dCategory == '휴가신청서'}" th:href="@{/testdoc/{dSeq}(dSeq=${list.dSeq})}">보기</a>
+					<a th:if="${list.dCategory == '출장보고서'}" th:href="@{/myApprovaldoc/{dSeq}(dSeq=${list.dSeq})}">보기</a>
+					<a th:if="${list.dCategory == '휴가신청서'}" th:href="@{/myApprovaldoc/{dSeq}(dSeq=${list.dSeq})}">보기</a>
 				</td>
 						</tr>
 					 </table>

@@ -86,7 +86,7 @@ public class MyApprovalService {
     public void approvalState(String state, int dSeq, int loginId) {
     	//state는 결재/반려 중 어떤 버튼을 눌렀는지
     	
-    	
+    	System.out.println("state : " + state + "dSeq : " + dSeq + "loginId : " + loginId);
     	
     	MyApprovalDTO2 Dto = myapprovalmapper.selectApprovers(dSeq, loginId);
  

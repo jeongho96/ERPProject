@@ -13,7 +13,7 @@
 	<div th:replace="layout/header.html :: header"></div>
 
 	<div class="container-fluid ">
-	    <div class="row">
+	    <form class="row">
 	        <!-- Menu Section -->
 	        <div th:replace="layout/menu.html :: div"></div>
 	
@@ -22,15 +22,14 @@
 	        <div class="col-md-10 bg-light bg-gradient h-auto">
 	            <div id="top">출장보고서</div>
 	
-	            <form th:action="@{/management/travels/{dSeq}(dSeq = ${travel.dSeq})}" th:object="${travel}" method="post">
-					<input type="hidden" name="_method" value="PUT">
+			<form th:object="${travel}" method="post">
 	                <div id="meddle">
 	                    <!-- 왼쪽. -->
 	                    <div>
 	                        <!-- 일자선택  -->
 	                        <div id="dateInputContainer">
 	                            <label for="dateInput">일자 </label>
-	                            <input type="date" id="dateInput" name="dateInput" th:field="*{dDraftingDate}" readonly>
+	                            <input type="date" id="dateInput" name="dateInput" th:field="*{dDraftingDate}" disabled>
 	                        </div>
 	
 	                        <!-- 구분선택. -->
@@ -46,24 +45,12 @@
 	                            <label for="department">결재자</label>
 	                            <div id="departmentselect">
 	                                <div id="department-one">
-	                                    <select id="aprvPa1" name="aprvPa1" onchange="selectChange(this.value, 'aprvName1')" th:field="*{aprvPa1}">
-	                                        <option th:each="partname : ${partnames}" th:value="${partname.pName}" th:text="${partname.pName}"></option>
-	                                    </select>
-	                                    <select id="aprvName1" name="aprvName1" th:field="*{aprvName1}">
-											<option value="도너">도너</option>
-											<option value="김팀장">김팀장</option>
-											<option value="김사장">김사장</option>
-	                                    </select>
+	                                    <input class="info-input" type="text" id="aprvPa1" name="apprvPa1" th:field="*{aprvPa1}" readonly>
+	                                    <input class="info-input" type="text" id="aprvName1" name="apprvName1" th:field="*{aprvName1}" readonly>
 	                                </div>
 	                                <div id="department-two">
-	                                    <select id="aprvPa2" name="aprvPa2" onchange="selectChange(this.value, 'aprvName2')" th:field="*{aprvPa2}">
-	                                        <option th:each="partname : ${partnames}" th:value="${partname.pName}" th:text="${partname.pName}"></option>
-	                                    </select>
-	                                    <select id="aprvName2" name="aprvName2" th:field="*{aprvName2}">
-											<option value="김또치">김또치</option>
-											<option value="김팀장">김팀장</option>
-											<option value="김사장">김사장</option>
-	                                    </select>
+	                                    <input class="info-input" type="text" id="aprvPa2" name="apprvPa2" th:field="*{aprvPa2}" readonly>
+	                                    <input class="info-input" type="text" id="aprvName2" name="apprvName2" th:field="*{aprvName2}" readonly>
 	                                </div>
 	                            </div>
 	                        </div>
@@ -88,37 +75,37 @@
 	                            </tr>
 	                             <tr>
 					               	<td><span class="info-label">출장지</span></td>
-	                                <td><input class="info-input" type="text" id="reason" name="reason" th:field="*{tLocation}" readonly></td>
+	                                <td><input class="info-input" type="text" id="reason" name="reason" th:field="*{tLocation}" disabled></td>
 				             	</tr>
 	                            <tr>
 	                                <td><span class="info-label">방문목적</span></td>
-	                                <td><input class="info-input" type="text" id="reason" name="reason" th:field="*{tReason}" readonly></td>
+	                                <td><input class="info-input" type="text" id="reason" name="reason" th:field="*{tReason}" disabled></td>
 	                            </tr>
 	                            <tr>
 	                                <td><span class="info-label">숙박지</span></td>
-	                                <td><input class="info-input" type="text" id="reason" name="reason" th:field="*{tAccommodation}" readonly></td>
+	                                <td><input class="info-input" type="text" id="reason" name="reason" th:field="*{tAccommodation}" disabled></td>
 	                            </tr>
 	                            <tr>
 	                                <td><span class="info-label">교통비</span></td>
-	                                <td><input class="info-input" type="text" id="reason" name="reason" th:field="*{tTransCost}" readonly></td>
+	                                <td><input class="info-input" type="text" id="reason" name="reason" th:field="*{tTransCost}" disabled></td>
 	                            </tr>
 	                            <tr>
 	                                <td><span class="info-label">식비</span></td>
-	                                <td><input class="info-input" type="text" id="reason" name="reason" th:field="*{tFoodCost}" readonly></td>
+	                                <td><input class="info-input" type="text" id="reason" name="reason" th:field="*{tFoodCost}" disabled></td>
 	                            </tr>
 	                            <tr>
 	                                <td><span class="info-label">숙박비</span></td>
-	                                <td><input class="info-input" type="text" id="reason" name="reason" th:field="*{tAccommodationCost}" readonly></td>
+	                                <td><input class="info-input" type="text" id="reason" name="reason" th:field="*{tAccommodationCost}" disabled></td>
 	                            </tr>
 	                            <tr>
 	                                <td><span class="info-label">기타비용</span></td>
-	                                <td><input class="info-input" type="text" id="reason" name="reason" th:field="*{tEtcCost}" readonly></td>
+	                                <td><input class="info-input" type="text" id="reason" name="reason" th:field="*{tEtcCost}" disabled></td>
 	                            </tr>
 	                            <tr>
 	                                <td><span class="info-label">기간</span></td>
 	                                <td>
-	                                    <input class="info-input" type="date" name="startDate" id="startDate" th:field="*{tStartDate}" readonly> ~
-	                                    <input class="info-input" type="date" name="endDate" id="endDate" th:field="*{tEndDate}" readonly>
+	                                    <input class="info-input" type="date" name="startDate" id="startDate" th:field="*{tStartDate}" disabled> ~
+	                                    <input class="info-input" type="date" name="endDate" id="endDate" th:field="*{tEndDate}" disabled>
 	                                    <span id="dateWarning"></span>
 	                                </td>
 	                            </tr>
@@ -159,9 +146,9 @@
 					<!--</form>-->
 				</div>
 		         
-		          
-	            </form>
+	
 	        </div>
+	        </form>
 	    </div>
 	</div>
 	<!--<script src="/js/managementVacation.js"></script>-->

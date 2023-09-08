@@ -52,7 +52,7 @@ public class MyApprovalController {
         return "myApprovalList";
     }
     
-	@GetMapping("/testdoc/{dSeq}")
+	@GetMapping("/myApprovaldoc/{dSeq}")
     public String myApprovalDoc(@PathVariable int dSeq, Model model, HttpSession session) {
 		UserDTO userDTO= (UserDTO)session.getAttribute("loginUser");
 		int loginid = userDTO.getUId();
@@ -61,13 +61,8 @@ public class MyApprovalController {
     	//문서 정보 담기
     	MyApprovalDTO3 DrafterDto = myApprovalService.selectByDSeq(dSeq);
     		
-    		
     	    check = myApprovalService.nowApproval(dSeq, loginid, DrafterDto.getDDrafterId());
 
-    		System.out.println(dSeq);
-    		
-    		// Travel로 가져오고 있고, managemantService 106번 오류, 그리고 기안자가 반드시 두명이어야함
-    		// 하지만 앞으로의 조건이 기안자는 반드시 두명을 할 것이라 걱정할 것 없음
     		model.addAttribute("mylist", DrafterDto);
     		model.addAttribute("check", check );
 
@@ -90,9 +85,10 @@ public class MyApprovalController {
         
 		UserDTO userDTO= (UserDTO)session.getAttribute("loginUser");
 		int loginid = userDTO.getUId();
-    	
         String state = DO.getState();
         int dSeq = DO.getDSeq();
+        System.out.println(state);
+        System.out.println(dSeq);
 		MyApprovalDTO3 DrafterDto = myApprovalService.selectByDSeq(dSeq);
 		System.out.println(state);
         myApprovalService.approvalState(state, dSeq, loginid);
