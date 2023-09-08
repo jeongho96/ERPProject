@@ -33,5 +33,7 @@
 		WHERE u_id = #{uId}
     </select>
     
+    <select id=""></select>
+    
     
 </mapper>
