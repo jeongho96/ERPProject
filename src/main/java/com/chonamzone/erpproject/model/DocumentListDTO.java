@@ -14,7 +14,7 @@ public class DocumentListDTO {
 	@Setter
 	@NoArgsConstructor
 	public static class MapperData {
-		private int dSeq;										// 결재라인 식별자
+		private int dSeq;									// 결재라인 식별자
 		private LocalDate dDraftingDate;					// 기안 일자
 		private String dStatus;								// 진행 상태
 		private int dDrafterId;								// 기안자
