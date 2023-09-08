@@ -40,6 +40,9 @@ public class UserService {
 		return partnameMapper.getAllPartNames();
 	}
 	
+	public List<UserDTO> getAllUser(){
+		return userMapper.getAllUser();
+	}
 	
 	public void registerUser(UserDTO user) {
         userMapper.insertUser(user);
