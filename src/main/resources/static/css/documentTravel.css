@@ -1,30 +1,22 @@
 @charset "EUC-KR";
 
  #top {
-	position: absolute;
-	width: 117px;
-	height: 22px;
-	left: 366px;
-	top: 162px;
-	
-	font-family: 'Fascinate';
-	font-style: normal;
 	font-weight: 900;
-	font-size: 20px;
-	line-height: 27px;
-	
-	color: #4F7578;
+    font-size: 20px;
+    color: #4F7578;
+    margin-top: 13px;
+
   }
   
   #meddle {
-	position: absolute;
+	/*position: absolute;
     width: 1033px;
     height: 703px;
     left: 356px;
     top: 193px;
     background: #DCDED4;
     display: flex;
-    justify-content: space-around;
+    justify-content: space-around;*/
   }
  
   #dateInputContainer {
@@ -108,23 +100,24 @@
   
   
   #right {
-	  position: absolute;
-    width: 570px;
-    height: 654px;
-    left: 430px;
-    top: 26px;
-    background: #FFFFFF;
-     border: 1px solid black;
+	
+    /* width: 570px; */
+    /* height: 654px; */
+    margin-left: 336px;
+    /* left: 430px; */
+    /* top: 26px; */
+    /* background: #FFFFFF; */
+    border: 1px solid black;
   }
 
   
   
   #rest {
-	  position: absolute;
+	position: absolute;
     width: 125px;
     height: 24px;
-    left: 224px;
-    top: 22px;
+    left: 750px;
+    top: 64px;
     font-family: 'Familjen Grotesk';
     font-style: normal;
     font-weight: 700;
@@ -172,23 +165,20 @@
   }
   
   
-  
+#under {
+	display: flex;
+}
+
   .under-one {
 	  /* 제출 */
-
-	position: absolute;
-	width: 227px;
-	height: 56px;
-	left: 894px;
-	top: 924px;
-	
-	background: #DCDED4;
-
+	margin-left: 900px;
+    margin-top: 5px;
+    margin-bottom: 5px;
   }
   
   #under input {
 	  margin: 3.5px;
-    width: 221px;
+   width: 150px;
     height: 50px;
     background-color: white;
     color: #4F7578;
@@ -204,13 +194,7 @@
   .under-two {
 	  /*  취소  */
 
-	position: absolute;
-	width: 227px;
-	height: 56px;
-	left: 1162px;
-	top: 924px;
-	
-	background: #DCDED4;
-
+    margin-top: 5px;
+    margin-bottom: 5px;
 
   }
