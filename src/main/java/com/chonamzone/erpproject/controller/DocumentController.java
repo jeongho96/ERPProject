@@ -1,5 +1,7 @@
 package com.chonamzone.erpproject.controller;
 
+import java.time.LocalDate;
+
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,22 +34,25 @@ public class DocumentController {
 		UserDTO userDTO = (UserDTO) session.getAttribute("loginUser");
 		
 		VacationDTO.MGVacationDTO vacation = new VacationDTO.MGVacationDTO();
-		vacation.setUName(userDTO.getUName());
-		vacation.setUPosition(userDTO.getUPosition());
+		vacation.setUserData(userDTO);
+		vacation.setPName(documentService.getPartname(userDTO.getPId()));
 		
 		model.addAttribute("vacation", vacation);
 		return "documentVacation";
 	}
+	
 	
 	@GetMapping("/document/travel")
 	public String documenttravelcontroller() {
 		return"documentTravel";
 	}
 	
+	
 	@PostMapping("/document/vacation") 
 	public String documentVacationInsertController(@ModelAttribute("vacation") VacationDTO.MGVacationDTO vacation,HttpSession session ) {
 		UserDTO userDTO = (UserDTO) session.getAttribute("loginUser");
 		int loginId = userDTO.getUId();
+		
 		
 		documentService.insert(vacation, loginId);
 	
