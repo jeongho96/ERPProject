@@ -20,4 +20,9 @@
 		WHERE d_seq = #{dSeq}
 	</update>
 	
+	<insert id="insert" parameterType="com.chonamzone.erpproject.model.TravelDTO$MGVacationDTO">
+		INSERT INTO travels (d_seq, t_location, t_reason, t_accommodation, t_trans_cost, t_food_cost, t_accommodation_cost, t_etc_cost, t_start_date, t_end_date)
+		VALUES (#{dSeq}, #{tLocation}, #{tReason}, #{tAccommodation}, #{tTransCost}, #{tFoodCost}, #{tAccommodationCost}, #{tEtcCost}, #{tStartDate}, #{tEndDate})
+	</insert>
+	
 </mapper>

@@ -57,5 +57,11 @@ public class TravelDTO {
 		private String tStartDate;
 		private String tEndDate;
 		
+		public void setUserData(UserDTO userDTO) {
+			this.dDraftingDate = LocalDate.now().toString();
+			this.uName = userDTO.getUName();
+			this.uPosition = userDTO.getUPosition();
+		}
+		
 	}
 }
