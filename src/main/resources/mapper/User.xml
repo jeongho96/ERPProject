@@ -38,7 +38,14 @@
 		WHERE u_id = #{uId}
     </select>
     
-    <select id=""></select>
+    <select id="getUserIdByName" parameterType="String" resultType="int">
+    	SELECT u.u_id
+    	FROM users u
+    	INNER JOIN partnames p
+    	ON u.p_id = p.p_id
+    	WHERE p.p_name = #{pName}
+    	AND u.u_name = #{uName}
+    </select>
     
     
 </mapper>
