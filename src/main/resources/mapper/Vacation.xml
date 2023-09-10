@@ -21,7 +21,7 @@
 
  	
 	<insert id="insert" parameterType="com.chonamzone.erpproject.model.VacationDTO$MGVacationDTO">
-		INSERT INTO VACATIONS (d_seq, v_leave_type, v_reason, v_start_date, v_end_date, v_employee_contact)
+		INSERT INTO vacations (d_seq, v_leave_type, v_reason, v_start_date, v_end_date, v_employee_contact)
 			VALUES (#{dSeq}, #{vLeaveType}, #{vReason}, #{vStartDate}, #{vEndDate}, #{vEmployeeContact})
 	</insert> 
 	
