@@ -36,8 +36,11 @@ public class ManagementService {
 	private final UserMapper userMapper;
 	private final PartnameMapper partnameMapper;
 	
-	/*
-	 * 통합 결재 관리 전체 보기
+	/**
+	 * 통합 결재 관리 전체 데이터 출력 메소드
+	 * 페이지 번호에 따라 데이터 갯수 달라짐(pagination)
+	 * @param page
+	 * @return 전체 결재문서 데이터 리스트
 	 */
 	public List<DocumentListDTO.MGResponse> getManagementAllList(int page) {
 		Map<String, Integer> pagination = new HashMap<>();
@@ -50,8 +53,12 @@ public class ManagementService {
 		return createResponseList(documentMapperList);
 	}
 	
-	/*
-	 * 통합 결재 관리 진행중, 반려, 승인 탭
+	/**
+	 * 통합 결재 관리에서 진행중, 반려, 승인 탭 데이터 출력 메소드
+	 * 페이지 번호에 따라 데이터 갯수 달라짐(pagination)
+	 * @param page
+	 * @param status
+	 * @return 문서 상태에 따른 결재문서 데이터 리스트
 	 */
 	public List<DocumentListDTO.MGResponse> getManagementStatusList(int page, String status) {
 		Map<String, Object> map = new HashMap<>();
@@ -65,8 +72,13 @@ public class ManagementService {
 		return createResponseList(documentMapperList);
 	}
 	
-	/*
+	
+	/**
 	 * 통합 결재 관리 리스트에서 reponseList 만드는 함수
+	 * 1. 통합 결재 관리 리스트에 들어갈 정보들 documentResponseList에 옮겨 담음
+	 * 2. 리스트별 기안자 사번->이름, 결재자 사번->이름으로 변경함 
+	 * @param documentMapperList
+	 * @return 결재 문서 목록 리스트
 	 */
 	private List<MGResponse> createResponseList(List<MapperData> documentMapperList) {
 		List<DocumentListDTO.MGResponse> documentResponseList = new ArrayList<>();
@@ -85,8 +97,11 @@ public class ManagementService {
 	}
 
 	
-	
-	
+	/**
+	 * 통합 결재 관리 중 출장보고서 상세보기
+	 * @param dSeq
+	 * @return 출장보고서 데이터
+	 */
 	public TravelDTO.MGVacationDTO getManagementTravel(int dSeq) {
 		DocumentListDTO.MapperData documentListDTO = documentListMapper.getDocumentListByDSeq(dSeq);
 		List<ApproverDTO.MGResponse> approversDTO = approverMapper.getApproverDetailsListByDSeq(dSeq);
@@ -116,6 +131,12 @@ public class ManagementService {
 		return travel;
 	}
 	
+	
+	/**
+	 * 통합 결재 관리 중 휴가신청서 상세보기
+	 * @param dSeq
+	 * @return 휴가신청서 데이터
+	 */
 	public VacationDTO.MGVacationDTO getManagementVacation(int dSeq) {
 		DocumentListDTO.MapperData documentListDTO = documentListMapper.getDocumentListByDSeq(dSeq);
 		List<ApproverDTO.MGResponse> approversDTO = approverMapper.getApproverDetailsListByDSeq(dSeq);
@@ -142,11 +163,19 @@ public class ManagementService {
 	}
 
 	
+	/**
+	 * 모든 부서와 부서에 따른 사원 정보 가져오는 함수
+	 * @return 부서명, 해당 사원명 전체 리스트 
+	 */
 	public List<PartnameDTO.MGResponse> getPartnameWithUsernameAll(){
 		return partnameMapper.getPartnameWithUserNameAll();
 	}
 
 	
+	/**
+	 * 휴가신청서 정보 수정
+	 * @param vacation
+	 */
 	public void updateVacations(VacationDTO.MGVacationDTO vacation) {		
 		Map<String, Object> documentMap = new HashMap<>();
 		documentMap.put("dSeq", vacation.getDSeq());
@@ -173,6 +202,10 @@ public class ManagementService {
 	}
 	
 	
+	/**
+	 * 출장보고서 정보 수정
+	 * @param travel
+	 */
 	public void updateTravels(TravelDTO.MGVacationDTO travel) {
 		Map<String, Object> documentMap = new HashMap<>();
 		documentMap.put("dSeq", travel.getDSeq());
