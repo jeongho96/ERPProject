@@ -22,7 +22,7 @@
 	        <div class="col-md-10 bg-light bg-gradient h-auto">
 	            <div id="top">출장보고서 수정</div>
 	
-	            <form th:action="@{/management/travels/{dSeq}(dSeq = ${travel.dSeq})}" th:object="${travel}" method="post">
+	            <form th:action="@{/management/travels/{dSeq}(dSeq = ${travel.dSeq})}" th:object="${travel}" method="post" onsubmit="return signName();">
 					<input type="hidden" name="_method" value="PUT">
 	                <div id="meddle">
 	                    <!-- 왼쪽. -->
@@ -129,7 +129,7 @@
 	                        <div id="low-lable">
 	                            <p>위와 같이 출장을 신청하오니 승인하여 주시기 바랍니다.</p>
 	                            <p><span id="date"></span></p>
-	                            <p>성명 <input type="text" name="applicantName"></p>
+	                            <p>성명 <input type="text" id="applicantName" name="applicantName"></p>
 	                            <p>승인 <input type="text" name="approval"></p>
 	                        </div>
 	                    </div>
@@ -150,6 +150,7 @@
 	    </div>
 	</div>
 	<!--<script src="/js/managementVacation.js"></script>-->
+	<script src="/js/managementTravel.js"></script>
 	<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 	<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@1.16.1/dist/umd/popper.min.js"></script>
 	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
