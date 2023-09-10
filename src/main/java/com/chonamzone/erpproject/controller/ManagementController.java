@@ -23,6 +23,12 @@ public class ManagementController {
 
 	private final ManagementService managementService;
 
+	/**
+	 * 전체 문서 목록 보기
+	 * @param page
+	 * @param model
+	 * @return 전체 문서 목록 화면
+	 */
 	@GetMapping("/management/all")
 	public String managementAllList(@RequestParam int page, Model model) {
 		List<MGResponse> managementList = managementService.getManagementAllList(page);
@@ -33,6 +39,12 @@ public class ManagementController {
 		return "managementList";
 	}
 
+	/**
+	 * 결재 상태가 진행중인 문서 목록 보기
+	 * @param page
+	 * @param model
+	 * @return 결재 상태가 진행중인 문서 목록 화면
+	 */
 	@GetMapping("/management/progress")
 	public String managementProgressList(@RequestParam int page, Model model) {
 		List<MGResponse> managementList = managementService.getManagementStatusList(page, "진행중");
@@ -43,6 +55,12 @@ public class ManagementController {
 		return "managementList";
 	}
 
+	/**
+	 * 결재 상태가 반려인 문서 목록 보기
+	 * @param page
+	 * @param model
+	 * @return 결재 상태가 반려인 문서 목록 화면
+	 */
 	@GetMapping("/management/refuse")
 	public String managementRefuseList(@RequestParam int page, Model model) {
 		List<MGResponse> managementList = managementService.getManagementStatusList(page, "반려");
@@ -53,6 +71,12 @@ public class ManagementController {
 		return "managementList";
 	}
 
+	/**
+	 * 결재 상태가 승인인 문서 목록 보기
+	 * @param page
+	 * @param model
+	 * @return 결재 상태가 승인인 문서 목록 화면
+	 */
 	@GetMapping("/management/approval")
 	public String managementApprovalList(@RequestParam int page, Model model) {
 		List<MGResponse> managementList = managementService.getManagementStatusList(page, "최종승인");
@@ -63,6 +87,13 @@ public class ManagementController {
 		return "managementList";
 	}
 
+	
+	/**
+	 * 출장보고서 상세 보기
+	 * @param dSeq
+	 * @param model
+	 * @return 출장보고서 상세 화면
+	 */
 	@GetMapping("/management/travels/{dSeq}")
 	public String getManagementTravel(@PathVariable int dSeq, Model model) {
 		model.addAttribute("travel", managementService.getManagementTravel(dSeq));
@@ -70,6 +101,12 @@ public class ManagementController {
 		return "managementTravel";
 	}
 
+	/**
+	 * 휴가신청서 상세 보기
+	 * @param dSeq
+	 * @param model
+	 * @return 휴가신청서 상세 화면
+	 */
 	@GetMapping("/management/vacations/{dSeq}")
 	public String managementVacation(@PathVariable int dSeq, Model model) {
 		model.addAttribute("vacation", managementService.getManagementVacation(dSeq));
@@ -77,22 +114,40 @@ public class ManagementController {
 		return "managementVacation";
 	}
 
-	@PutMapping("/management/vacations/{dSeq}")
-	public String updateVacations(@PathVariable int dSeq, @ModelAttribute VacationDTO.MGVacationDTO vacation) {
-		managementService.updateVacations(vacation);
-		return "redirect:/management/all?page=1";
-
-	}
-
-
+	/**
+	 * 출장보고서 수정 화면
+	 * @param dSeq
+	 * @param travel
+	 * @param model
+	 * @return 수정 완료 메시지
+	 */
 	 @PutMapping("/management/travels/{dSeq}") 
-	 public String updateTravels(@PathVariable int dSeq, @ModelAttribute TravelDTO.MGVacationDTO travel) { 
-		 
+	 public String updateTravels(@PathVariable int dSeq, @ModelAttribute TravelDTO.MGVacationDTO travel, Model model) { 
 		 managementService.updateTravels(travel);
-	 
-		 return "redirect:/management/all?page=1";
-	 
+		 
+		 model.addAttribute("message", "수정이 완료되었습니다.");
+		 model.addAttribute("successUrl", "/management/all?page=1");
+			
+		 return "message";
 	 }
+	
+
+	/**
+	 * 휴가신청서 수정 화면
+	 * @param dSeq
+	 * @param vacation 
+	 * @param model
+	 * @return 수정 완료 메시지
+	 */
+	@PutMapping("/management/vacations/{dSeq}")
+	public String updateVacations(@PathVariable int dSeq, @ModelAttribute VacationDTO.MGVacationDTO vacation, Model model) {
+		managementService.updateVacations(vacation);
+		
+		model.addAttribute("message", "수정이 완료되었습니다.");
+		model.addAttribute("successUrl", "/management/all?page=1");
+		
+		return "message";
+	}
 	 
 
 }
